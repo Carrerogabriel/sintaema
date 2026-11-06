@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color: #16324f;
+}
+
+body {
+  min-height: 100vh;
+  background-color: #d9f0fa;
+  background-image:
+    radial-gradient(circle at 12% 18%, rgba(255, 255, 255, 0.55) 0 18%, transparent 19%),
+    radial-gradient(circle at 78% 8%, rgba(255, 255, 255, 0.4) 0 12%, transparent 13%),
+    radial-gradient(ellipse at 50% 120%, rgba(0, 144, 208, 0.08), transparent 55%),
+    repeating-linear-gradient(
+      120deg,
+      rgba(255, 255, 255, 0.18) 0 2px,
+      transparent 2px 28px
+    );
+}
+
+.prose-sintaema p + p {
+  margin-top: 1rem;
+}
