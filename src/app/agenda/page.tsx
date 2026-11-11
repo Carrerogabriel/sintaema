@@ -1,26 +1,52 @@
+import { Icon } from "@/components/Icon";
+import { PageHero } from "@/components/PageHero";
+import { Reveal } from "@/components/Reveal";
 import { events } from "@/data/content";
-import { formatDate } from "@/lib/format";
+import { formatShortDate } from "@/lib/format";
 
 export const metadata = { title: "Agenda" };
 
 export default function AgendaPage() {
+  const sorted = [...events].sort((a, b) => b.date.localeCompare(a.date));
+
   return (
-    <div>
-      <header className="mb-6">
-        <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-green">Calendário</p>
-        <h1 className="mt-1 font-display text-4xl uppercase text-brand-navy">Agenda</h1>
-      </header>
-      <ul className="grid gap-4">
-        {events.map((event) => (
-          <li key={event.title} className="rounded-xl bg-white p-6 shadow-card">
-            <p className="text-xs uppercase tracking-wide text-brand-green">
-              {formatDate(event.date)} · {event.place}
-            </p>
-            <h2 className="mt-2 font-display text-2xl uppercase text-brand-navy">{event.title}</h2>
-            <p className="mt-2 text-slate-600">{event.description}</p>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <>
+      <PageHero
+        eyebrow="Calendário"
+        title="Agenda"
+        description="Atos, assembleias e atendimentos do SINTAEMA-SC na sede e nas regionais."
+        crumbs={[{ label: "Agenda" }]}
+      />
+
+      <div className="container-site">
+        <ul className="mx-auto grid max-w-4xl gap-5 pt-4">
+          {sorted.map((event, index) => {
+            const d = formatShortDate(event.date);
+            return (
+              <Reveal as="li" key={event.title} delay={index * 100}>
+                <article className="card card-hover group flex flex-col overflow-hidden sm:flex-row">
+                  <div className="flex items-center gap-3 bg-gradient-to-br from-brand-navy to-brand-navy-light px-6 py-4 text-white transition-colors duration-500 group-hover:from-brand-green group-hover:to-brand-green-dark sm:w-36 sm:flex-col sm:justify-center sm:gap-0 sm:py-8 sm:text-center">
+                    <span className="font-display text-4xl font-semibold leading-none sm:text-5xl">{d.day}</span>
+                    <span className="text-sm font-bold uppercase tracking-wider sm:mt-1">
+                      {d.month} <span className="opacity-70">{d.year}</span>
+                    </span>
+                  </div>
+                  <div className="flex-1 p-6">
+                    <p className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-green">
+                      <Icon name="pin" className="h-4 w-4" />
+                      {event.place}
+                    </p>
+                    <h2 className="mt-2 font-display text-2xl font-semibold uppercase leading-tight text-brand-navy">
+                      {event.title}
+                    </h2>
+                    <p className="mt-2 leading-relaxed text-slate-600">{event.description}</p>
+                  </div>
+                </article>
+              </Reveal>
+            );
+          })}
+        </ul>
+      </div>
+    </>
   );
 }
