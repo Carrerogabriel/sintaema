@@ -2,24 +2,179 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  color: #16324f;
+@layer base {
+  :root {
+    color: #16324f;
+    --header-h: 72px;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    min-height: 100vh;
+    background-color: #f4fbff;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: #1aaa4a;
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 3px solid #00bcd4;
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+
+  img {
+    -webkit-user-drag: none;
+  }
 }
 
-body {
-  min-height: 100vh;
-  background-color: #d9f0fa;
+@layer components {
+  .container-site {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em];
+  }
+
+  .eyebrow::before {
+    content: "";
+    @apply inline-block h-[2px] w-6 rounded-full bg-current;
+  }
+
+  .btn {
+    @apply relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full px-6 py-3 text-sm font-bold uppercase tracking-wide transition-all duration-300 active:scale-[0.97];
+  }
+
+  .btn-primary {
+    @apply btn bg-brand-green text-white shadow-glow hover:-translate-y-0.5 hover:bg-brand-green-dark;
+  }
+
+  .btn-secondary {
+    @apply btn bg-white text-brand-navy shadow-card hover:-translate-y-0.5 hover:shadow-card-hover;
+  }
+
+  .btn-ghost {
+    @apply btn border border-white/30 text-white hover:border-white hover:bg-white/10;
+  }
+
+  .card {
+    @apply rounded-2xl bg-white shadow-card ring-1 ring-brand-navy/5;
+  }
+
+  .card-hover {
+    @apply transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-card-hover;
+  }
+
+  .input {
+    @apply w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-base text-brand-ink outline-none transition placeholder:text-slate-400 focus:border-brand-blue focus:ring-4 focus:ring-brand-blue/15;
+  }
+
+  .link-arrow {
+    @apply inline-flex items-center gap-1.5 text-sm font-semibold text-brand-blue transition-colors hover:text-brand-navy;
+  }
+
+  .link-arrow svg {
+    @apply transition-transform duration-300;
+  }
+
+  .link-arrow:hover svg {
+    @apply translate-x-1;
+  }
+
+  .prose-sintaema p {
+    @apply text-[1.0625rem] leading-8 text-slate-700 md:text-lg md:leading-8;
+  }
+
+  .prose-sintaema p + p {
+    @apply mt-5;
+  }
+
+  .prose-sintaema > p:first-child::first-letter {
+    @apply float-left mr-3 mt-1 font-display text-6xl font-semibold leading-[0.85] text-brand-green;
+  }
+
+  .skeleton {
+    background: linear-gradient(90deg, #e6f2fa 25%, #f4fbff 50%, #e6f2fa 75%);
+    background-size: 200% 100%;
+    @apply animate-shimmer rounded-xl;
+  }
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.reveal[data-variant="left"] {
+  transform: translateX(-28px);
+}
+
+.reveal[data-variant="right"] {
+  transform: translateX(28px);
+}
+
+.reveal[data-variant="scale"] {
+  transform: scale(0.95);
+}
+
+.reveal[data-visible="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+/* Background texture for sections */
+.bg-water-pattern {
+  background-color: #f4fbff;
   background-image:
-    radial-gradient(circle at 12% 18%, rgba(255, 255, 255, 0.55) 0 18%, transparent 19%),
-    radial-gradient(circle at 78% 8%, rgba(255, 255, 255, 0.4) 0 12%, transparent 13%),
-    radial-gradient(ellipse at 50% 120%, rgba(0, 144, 208, 0.08), transparent 55%),
-    repeating-linear-gradient(
-      120deg,
-      rgba(255, 255, 255, 0.18) 0 2px,
-      transparent 2px 28px
-    );
+    radial-gradient(circle at 10% 10%, rgba(0, 144, 208, 0.07), transparent 40%),
+    radial-gradient(circle at 90% 30%, rgba(26, 170, 74, 0.06), transparent 35%),
+    radial-gradient(circle at 50% 100%, rgba(0, 188, 212, 0.07), transparent 45%);
 }
 
-.prose-sintaema p + p {
-  margin-top: 1rem;
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
 }

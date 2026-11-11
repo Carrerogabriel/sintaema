@@ -1,62 +1,101 @@
 import Link from "next/link";
 import { events } from "@/data/content";
-import { formatDate } from "@/lib/format";
+import { formatShortDate } from "@/lib/format";
+import { Icon } from "./Icon";
+import { Reveal } from "./Reveal";
 
 export function Sidebar() {
+  const upcoming = [...events].sort((a, b) => b.date.localeCompare(a.date));
+
   return (
-    <aside className="grid gap-5">
-      <Link
-        href="/filie-se"
-        className="overflow-hidden rounded-lg bg-gradient-to-b from-sky-400 to-brand-blue p-5 text-center text-white shadow-card"
-      >
-        <p className="text-xs font-bold uppercase tracking-[0.2em]">Clique aqui</p>
-        <p className="mt-3 font-display text-3xl uppercase">Filie-se hoje!</p>
-        <p className="mt-3 text-sm text-sky-50">
-          Fortaleça a luta pelos seus direitos. Contribuição de 1% sobre o salário fixo.
-        </p>
-      </Link>
-
-      <div className="rounded-lg bg-brand-navy p-5 text-white shadow-card">
-        <p className="text-xs font-bold uppercase tracking-[0.18em] text-sky-200">
-          Ações contra as
-        </p>
-        <h2 className="mt-2 font-display text-3xl leading-none">
-          Tentativas de municipalização
-        </h2>
-        <p className="mt-3 text-sm text-sky-100">
-          Denúncias de corrupção em sistemas municipalizados. Todos contra a privatização do
-          saneamento.
-        </p>
+    <aside className="grid gap-5 sm:grid-cols-2 lg:grid-cols-1 lg:content-start">
+      <Reveal variant="right">
         <Link
-          href="/noticias?categoria=Lutas"
-          className="mt-4 inline-block bg-red-600 px-3 py-1 text-xs font-bold uppercase"
+          href="/filie-se"
+          className="group relative block overflow-hidden rounded-2xl bg-gradient-to-br from-brand-blue to-brand-cyan p-6 text-white shadow-glow-blue transition duration-500 hover:-translate-y-1"
         >
-          Leia as denúncias
+          <div className="absolute -right-8 -top-8 h-32 w-32 animate-float rounded-full bg-white/15" aria-hidden="true" />
+          <div className="absolute -bottom-12 -left-6 h-28 w-28 rounded-full bg-white/10" aria-hidden="true" />
+          <span className="relative grid h-11 w-11 place-items-center rounded-xl bg-white/20 backdrop-blur">
+            <Icon name="heart" />
+          </span>
+          <p className="relative mt-4 font-display text-3xl font-semibold uppercase leading-none">
+            Filie-se hoje!
+          </p>
+          <p className="relative mt-3 text-sm text-sky-50">
+            Fortaleça a luta pelos seus direitos. Contribuição de 1% sobre o salário fixo.
+          </p>
+          <span className="relative mt-5 inline-flex items-center gap-2 text-sm font-bold uppercase">
+            Saiba como
+            <Icon name="arrowRight" className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </span>
         </Link>
-      </div>
+      </Reveal>
 
-      <Link href="/contato" className="rounded-lg bg-slate-100 p-5 shadow-card">
-        <p className="font-display text-3xl text-brand-navy">Ouvidoria</p>
-        <p className="mt-2 text-sm text-slate-600">
-          Envie denúncias, dúvidas e sugestões para a secretaria do sindicato.
-        </p>
-      </Link>
+      <Reveal variant="right" delay={80}>
+        <div className="relative overflow-hidden rounded-2xl bg-brand-navy p-6 text-white shadow-card">
+          <div className="bg-grid absolute inset-0 opacity-50" aria-hidden="true" />
+          <p className="relative inline-flex items-center gap-2 rounded-full bg-red-600/90 px-3 py-1 text-[11px] font-bold uppercase tracking-wider">
+            <Icon name="alert" className="h-3.5 w-3.5" />
+            Denúncia
+          </p>
+          <h2 className="relative mt-3 font-display text-2xl font-semibold uppercase leading-tight">
+            Contra a municipalização
+          </h2>
+          <p className="relative mt-2 text-sm text-sky-100/90">
+            Denúncias de corrupção em sistemas municipalizados. Todos contra a privatização do
+            saneamento.
+          </p>
+          <Link href="/noticias?categoria=Lutas" className="link-arrow relative mt-4 !text-brand-cyan hover:!text-white">
+            Leia as denúncias
+            <Icon name="arrowRight" className="h-4 w-4" />
+          </Link>
+        </div>
+      </Reveal>
 
-      <div className="rounded-lg bg-white p-5 shadow-card">
-        <h2 className="font-display text-xl uppercase text-brand-navy">Agenda</h2>
-        <ul className="mt-4 grid gap-4">
-          {events.map((event) => (
-            <li key={event.title} className="border-l-4 border-brand-green pl-3">
-              <p className="text-[11px] uppercase text-slate-500">{formatDate(event.date)}</p>
-              <p className="font-semibold text-brand-navy">{event.title}</p>
-              <p className="text-xs text-slate-500">{event.place}</p>
-            </li>
-          ))}
-        </ul>
-        <Link href="/agenda" className="mt-4 inline-block text-sm font-semibold text-brand-blue">
-          Ver toda a agenda ►
+      <Reveal variant="right" delay={160}>
+        <div className="card p-6">
+          <div className="flex items-center justify-between">
+            <h2 className="font-display text-xl font-semibold uppercase text-brand-navy">Agenda</h2>
+            <Icon name="calendar" className="h-5 w-5 text-brand-green" />
+          </div>
+          <ul className="mt-4 grid gap-3">
+            {upcoming.map((event) => {
+              const d = formatShortDate(event.date);
+              return (
+                <li key={event.title} className="group flex gap-3 rounded-xl p-2 transition hover:bg-brand-sand">
+                  <div className="grid h-14 w-14 shrink-0 place-content-center rounded-xl bg-brand-green-light text-center text-brand-green-dark transition group-hover:bg-brand-green group-hover:text-white">
+                    <span className="font-display text-xl font-semibold leading-none">{d.day}</span>
+                    <span className="text-[10px] font-bold uppercase">{d.month}</span>
+                  </div>
+                  <div className="min-w-0">
+                    <p className="line-clamp-2 text-sm font-semibold leading-snug text-brand-navy">
+                      {event.title}
+                    </p>
+                    <p className="mt-0.5 line-clamp-1 text-xs text-slate-500">{event.place}</p>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+          <Link href="/agenda" className="link-arrow mt-4">
+            Ver toda a agenda
+            <Icon name="arrowRight" className="h-4 w-4" />
+          </Link>
+        </div>
+      </Reveal>
+
+      <Reveal variant="right" delay={240}>
+        <Link href="/contato" className="card card-hover group flex items-center gap-4 p-5">
+          <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-brand-sand text-brand-blue transition group-hover:bg-brand-blue group-hover:text-white">
+            <Icon name="megaphone" />
+          </span>
+          <span>
+            <span className="block font-display text-xl font-semibold uppercase text-brand-navy">Ouvidoria</span>
+            <span className="text-sm text-slate-600">Denúncias, dúvidas e sugestões.</span>
+          </span>
         </Link>
-      </div>
+      </Reveal>
     </aside>
   );
 }
