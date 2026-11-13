@@ -15,6 +15,8 @@ export type Post = {
   image: string;
   imageAlt: string;
   featured?: boolean;
+  /** Empresas a que a matéria se refere. Vazio = vale para todas. */
+  companies?: string[];
 };
 
 export const site = {
@@ -110,6 +112,7 @@ export const posts: Post[] = [
   },
   {
     slug: "candidatos-assinam-carta-compromisso-casan",
+    companies: ["casan"],
     title:
       "Eleições 2026: candidatos ao Governo do Estado assinam carta compromisso com a Casan pública",
     excerpt:
@@ -144,6 +147,7 @@ export const posts: Post[] = [
   },
   {
     slug: "tese-aprovada-fortalece-casan-publica",
+    companies: ["casan"],
     title: "1º Congresso: tese aprovada fortalece a luta em defesa da CASAN pública",
     excerpt:
       "A defesa da água como direito e da CASAN como patrimônio do povo catarinense ficou no centro da tese aprovada pelo 1º Congresso do SINTAEMA-SC.",
@@ -177,7 +181,13 @@ export const posts: Post[] = [
   },
 ];
 
-export const events = [
+export const events: Array<{
+  title: string;
+  date: string;
+  place: string;
+  description: string;
+  companies?: string[];
+}> = [
   {
     title: "Dia nacional de luta em defesa do saneamento público",
     date: "2026-10-22",
@@ -201,7 +211,12 @@ export const events = [
   },
 ];
 
-export const bulletins = [
+export const bulletins: Array<{
+  name: string;
+  issue: string;
+  summary: string;
+  companies?: string[];
+}> = [
   {
     name: "Bomba d'Água",
     issue: "Edição 880",
@@ -210,6 +225,7 @@ export const bulletins = [
   {
     name: "Conexão",
     issue: "Reestruturação da Casan",
+    companies: ["casan"],
     summary: "Quase 19 milhões ao ano em debate na reestruturação da empresa.",
   },
   {
@@ -219,13 +235,28 @@ export const bulletins = [
   },
 ];
 
-export function getPost(slug: string) {
-  return posts.find((post) => post.slug === slug);
+const belongsTo = (item: { companies?: string[] }, company: string) =>
+  !item.companies || item.companies.length === 0 || item.companies.includes(company);
+
+export function postsFor(company: string) {
+  return posts.filter((post) => belongsTo(post, company));
 }
 
-export function relatedPosts(slug: string, limit = 3) {
-  const current = getPost(slug);
-  const pool = posts.filter((post) => post.slug !== slug);
+export function eventsFor(company: string) {
+  return events.filter((event) => belongsTo(event, company));
+}
+
+export function bulletinsFor(company: string) {
+  return bulletins.filter((bulletin) => belongsTo(bulletin, company));
+}
+
+export function getPost(slug: string, company: string) {
+  return postsFor(company).find((post) => post.slug === slug);
+}
+
+export function relatedPosts(slug: string, company: string, limit = 3) {
+  const current = getPost(slug, company);
+  const pool = postsFor(company).filter((post) => post.slug !== slug);
   const same = pool.filter((post) => post.category === current?.category);
   return [...same, ...pool.filter((post) => post.category !== current?.category)].slice(
     0,
@@ -233,10 +264,11 @@ export function relatedPosts(slug: string, limit = 3) {
   );
 }
 
-export function searchPosts(query: string) {
+export function searchPosts(query: string, company: string) {
+  const list = postsFor(company);
   const q = query.trim().toLowerCase();
-  if (!q) return posts;
-  return posts.filter((post) =>
+  if (!q) return list;
+  return list.filter((post) =>
     [post.title, post.excerpt, post.category, ...post.content]
       .join(" ")
       .toLowerCase()

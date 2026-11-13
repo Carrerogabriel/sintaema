@@ -3,6 +3,16 @@ import type { SVGProps } from "react";
 const paths = {
   arrowRight: <path d="M5 12h14M13 6l6 6-6 6" />,
   arrowUp: <path d="M12 19V5M6 11l6-6 6 6" />,
+  arrowLeft: <path d="M19 12H5M11 6l-6 6 6 6" />,
+  download: <path d="M12 4v11M7 10l5 5 5-5M5 20h14" />,
+  grid: (
+    <>
+      <rect x="4" y="4" width="7" height="7" rx="1.5" />
+      <rect x="13" y="4" width="7" height="7" rx="1.5" />
+      <rect x="4" y="13" width="7" height="7" rx="1.5" />
+      <rect x="13" y="13" width="7" height="7" rx="1.5" />
+    </>
+  ),
   search: (
     <>
       <circle cx="11" cy="11" r="7" />

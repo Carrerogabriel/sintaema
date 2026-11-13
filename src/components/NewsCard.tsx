@@ -6,10 +6,12 @@ import { Icon } from "./Icon";
 
 export function NewsCard({
   post,
+  base,
   variant = "default",
   priority = false,
 }: {
   post: Post;
+  base: string;
   variant?: "default" | "horizontal";
   priority?: boolean;
 }) {
@@ -17,7 +19,7 @@ export function NewsCard({
   return (
     <article className="card card-hover group h-full overflow-hidden">
       <Link
-        href={`/noticias/${post.slug}`}
+        href={`${base}/noticias/${post.slug}`}
         className={`flex h-full ${horizontal ? "flex-row" : "flex-col"}`}
       >
         <div

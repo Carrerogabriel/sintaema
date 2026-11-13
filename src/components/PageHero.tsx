@@ -10,12 +10,14 @@ export function PageHero({
   title,
   description,
   crumbs = [],
+  base,
   children,
 }: {
   eyebrow?: string;
   title: ReactNode;
   description?: ReactNode;
   crumbs?: Crumb[];
+  base: string;
   children?: ReactNode;
 }) {
   return (
@@ -34,7 +36,7 @@ export function PageHero({
         <nav aria-label="Trilha de navegação" className="animate-fade-in">
           <ol className="flex flex-wrap items-center gap-1.5 text-xs text-sky-200/80 sm:text-sm">
             <li>
-              <Link href="/" className="inline-flex items-center gap-1 transition hover:text-white">
+              <Link href={base} className="inline-flex items-center gap-1 transition hover:text-white">
                 <Icon name="home" className="h-3.5 w-3.5" />
                 Início
               </Link>

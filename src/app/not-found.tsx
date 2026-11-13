@@ -3,7 +3,7 @@ import { Icon } from "@/components/Icon";
 
 export default function NotFound() {
   return (
-    <div className="container-site grid min-h-[60vh] place-items-center py-16">
+    <main id="conteudo" className="container-site grid min-h-screen place-items-center py-16">
       <div className="max-w-lg animate-fade-up text-center">
         <div className="relative mx-auto h-28 w-24">
           <svg viewBox="0 0 56 72" className="h-28 w-24 animate-float" aria-hidden="true">
@@ -21,13 +21,10 @@ export default function NotFound() {
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <Link href="/" className="btn-primary">
             <Icon name="home" className="h-4 w-4" />
-            Voltar ao início
-          </Link>
-          <Link href="/noticias" className="btn-secondary">
-            Ver notícias
+            Escolher empresa
           </Link>
         </div>
       </div>
-    </div>
+    </main>
   );
 }

@@ -3,8 +3,20 @@
 @tailwind utilities;
 
 @layer base {
+  /* Default (SINTAEMA) palette — overridden per company by themeVars() */
   :root {
-    color: #16324f;
+    --c-primary: 11 46 92;
+    --c-primary-dark: 7 29 59;
+    --c-primary-light: 19 64 122;
+    --c-accent: 26 170 74;
+    --c-accent-dark: 20 138 59;
+    --c-accent-light: 232 247 238;
+    --c-secondary: 0 144 208;
+    --c-highlight: 0 188 212;
+    --c-tint: 217 240 250;
+    --c-surface: 244 251 255;
+    --c-ink: 22 50 79;
+    color: rgb(var(--c-ink));
     --header-h: 72px;
   }
 
@@ -15,17 +27,17 @@
 
   body {
     min-height: 100vh;
-    background-color: #f4fbff;
+    background-color: rgb(var(--c-surface));
     overflow-x: hidden;
   }
 
   ::selection {
-    background: #1aaa4a;
+    background: rgb(var(--c-accent));
     color: #fff;
   }
 
   :focus-visible {
-    outline: 3px solid #00bcd4;
+    outline: 3px solid rgb(var(--c-highlight));
     outline-offset: 2px;
     border-radius: 6px;
   }
@@ -102,7 +114,7 @@
   }
 
   .skeleton {
-    background: linear-gradient(90deg, #e6f2fa 25%, #f4fbff 50%, #e6f2fa 75%);
+    background: linear-gradient(90deg, rgb(var(--c-tint)) 25%, rgb(var(--c-surface)) 50%, rgb(var(--c-tint)) 75%);
     background-size: 200% 100%;
     @apply animate-shimmer rounded-xl;
   }
@@ -138,11 +150,11 @@
 
 /* Background texture for sections */
 .bg-water-pattern {
-  background-color: #f4fbff;
+  background-color: rgb(var(--c-surface));
   background-image:
-    radial-gradient(circle at 10% 10%, rgba(0, 144, 208, 0.07), transparent 40%),
-    radial-gradient(circle at 90% 30%, rgba(26, 170, 74, 0.06), transparent 35%),
-    radial-gradient(circle at 50% 100%, rgba(0, 188, 212, 0.07), transparent 45%);
+    radial-gradient(circle at 10% 10%, rgb(var(--c-secondary) / 0.07), transparent 40%),
+    radial-gradient(circle at 90% 30%, rgb(var(--c-accent) / 0.06), transparent 35%),
+    radial-gradient(circle at 50% 100%, rgb(var(--c-highlight) / 0.07), transparent 45%);
 }
 
 .bg-grid {
@@ -177,4 +189,19 @@
     opacity: 1;
     transform: none;
   }
+}
+
+/* ───────────── Página "Nossa história" ───────────── */
+.history-grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.09;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+.history-outline {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(214, 200, 180, 0.14);
 }
