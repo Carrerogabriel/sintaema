@@ -8,7 +8,7 @@ import { Reveal } from "./Reveal";
 import { Bubbles, Caustics, WaveEdge } from "./water/WaterFx";
 
 const links = [
-  { href: "/sobre", label: "O Sindicato" },
+  { href: "/historia", label: "O Sindicato" },
   { href: "/noticias", label: "Notícias" },
   { href: "/filie-se", label: "Filie-se" },
   { href: "/juridico", label: "Assessoria jurídica" },
