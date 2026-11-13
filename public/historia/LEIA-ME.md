@@ -45,3 +45,20 @@ O prefixo indica o capítulo (00 = abertura, 01 = anos de chumbo, 02 = fundaçã
 - Para nomes e legendas (ex.: primeira diretoria), edite o texto do espaço
   correspondente em `src/data/historia.ts` (campos `label` e `alt`).
 - Depois de adicionar fotos, reinicie o servidor ou faça um novo deploy.
+
+## Fotos já inseridas (novembro de 2026)
+
+As fotos vieram da apresentação **"SINTAEMA: 40 anos de sonhos, lutas e
+conquistas" (2017)**, com as legendas originais de cada slide. Cada foto mostra
+a sua legenda na página e no PDF.
+
+- Já preenchidos: `00-abertura`, `03-greve-1985`, `03-greves-1987`,
+  `03-lista-demissoes-1987`, `03-greve-1989`, `04-*` (exceto ações 1988) e
+  `05-liderancas-historicas`, `05-trabalhadores-em-campo`, `05-assembleias`,
+  `05-movimentos-sociais`.
+- Ainda faltam (não há fotos dessas épocas na apresentação): `01-anos-de-chumbo`,
+  `02-associacao-1975`, `02-fundacao-1977`, `02-primeira-diretoria`,
+  `02-primeiras-reunioes`, `03-acoes-1988`, `05-fundadores`,
+  `05-diretoria-atual`, `07-1-congresso` e `07-sede`.
+- A galeria "Acervo" usa as fotos de `acervo/` (lista e legendas em
+  `src/data/historia.ts`, constante `archive`).

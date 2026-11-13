@@ -54,6 +54,9 @@ export function PhotoSlot({
         </div>
       )}
       <span className="photo-slot__grain" aria-hidden="true" />
+      {src && slot.caption ? (
+        <figcaption className={`photo-slot__caption ${variant === "ambient" ? "is-ambient" : ""}`}>{slot.caption}</figcaption>
+      ) : null}
     </figure>
   );
 }

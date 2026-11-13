@@ -27,13 +27,16 @@ export type PhotoSlotInfo = {
   /** Por que ela está ali na narrativa. */
   purpose: string;
   alt: string;
+  /** Legenda real da foto (do acervo). Aparece sobre a imagem e no PDF. */
+  caption?: string;
 };
 
-const slot = (file: string, label: string, purpose: string, alt = label): PhotoSlotInfo => ({
+const slot = (file: string, label: string, purpose: string, alt = label, caption?: string): PhotoSlotInfo => ({
   file,
   label,
   purpose,
-  alt,
+  alt: caption ?? alt,
+  caption,
 });
 
 export const photoSlots = {
@@ -42,6 +45,7 @@ export const photoSlots = {
     "Imagem de abertura",
     "Uma foto marcante da categoria reunida (ato, assembleia ou greve) que represente a identidade do Sindicato.",
     "A categoria reunida em um momento histórico do SINTAEMA-SC",
+    "1985: Assembleia estadual",
   ),
   ditadura: slot(
     "01-anos-de-chumbo",
@@ -69,33 +73,114 @@ export const photoSlots = {
     "Primeiras reuniões",
     "Encontros da categoria nos primeiros anos do Sindicato.",
   ),
-  greve1985: slot("03-greve-1985", "Greve de outubro de 1985", "A primeira grande greve após o fim da ditadura."),
-  greves1987: slot("03-greves-1987", "As duas greves de 1987", "Mobilização da categoria em 1987."),
+  greve1985: slot(
+    "03-greve-1985",
+    "Greve de outubro de 1985",
+    "A primeira grande greve após o fim da ditadura.",
+    undefined,
+    "1985: Negociação coletiva",
+  ),
+  greves1987: slot(
+    "03-greves-1987",
+    "As duas greves de 1987",
+    "Mobilização da categoria em 1987.",
+    undefined,
+    "Greve de 1987",
+  ),
   demissoes1987: slot(
     "03-lista-demissoes-1987",
     "Contra a lista de demissões (ago/1987)",
     "Ato ou assembleia contra a lista de demissões.",
+    undefined,
+    "1987: Assembleia estadual",
   ),
   acoes1988: slot("03-acoes-1988", "Contra a venda de ações (1988)", "Primeira batalha contra a venda de ações da Casan."),
   greve1989: slot(
     "03-greve-1989",
     "Greve de 1989 e greve de fome",
     "Os 36 dias de greve e os 5 dias de greve de fome.",
+    undefined,
+    "1989: Fim da greve de fome",
   ),
-  greves1999: slot("04-greves-1999-2005", "Greves de 1999 a 2005", "Mobilizações em defesa dos empregos e direitos."),
+  greves1999: slot(
+    "04-greves-1999-2005",
+    "Greves de 1999 a 2005",
+    "Mobilizações em defesa dos empregos e direitos.",
+    undefined,
+    "Anos 2000: Greve em Criciúma",
+  ),
+  terceirizacao: slot(
+    "04-terceirizacao",
+    "Contra a terceirização",
+    "A luta pelo fim das terceirizações e por concurso público.",
+    undefined,
+    "Década de 90: Paralisação contra a terceirização",
+  ),
+  neoliberalismo: slot(
+    "04-neoliberalismo",
+    "Contra as políticas neoliberais",
+    "Mobilizações nacionais contra a retirada de direitos.",
+    undefined,
+    "1999: Passeata contra FHC e FMI",
+  ),
+  assembleia2000: slot(
+    "04-assembleia-2000",
+    "Assembleia estadual",
+    "A categoria reunida para decidir a campanha.",
+    undefined,
+    "2000: Assembleia estadual",
+  ),
   aguaPublica: slot(
     "04-agua-publica-2002",
     "Contra a privatização da água",
     "Atos em defesa da água pública e da Casan a partir de 2002.",
+    undefined,
+    "2004: Protesto contra a privatização",
   ),
-  lista500: slot("04-lista-500-2004", "A lista de 500 demissões (2004)", "A mobilização que venceu a lista de 500 demissões."),
-  acoes2011: slot("04-acoes-2011", "Contra a venda de ações (2011)", "A nova batalha contra a venda de ações da Casan."),
+  lista500: slot(
+    "04-lista-500-2004",
+    "A lista de 500 demissões (2004)",
+    "A mobilização que venceu a lista de 500 demissões.",
+    undefined,
+    "2004: Queima de caixão contra a lista de demissões",
+  ),
+  acoes2011: slot(
+    "04-acoes-2011",
+    "Contra a venda de ações (2011)",
+    "A nova batalha contra a venda de ações da Casan.",
+    undefined,
+    "2011: Jornada de lutas",
+  ),
   fundadores: slot("05-fundadores", "Fundadoras e fundadores", "As pessoas que criaram a Associação e o Sindicato."),
-  liderancas: slot("05-liderancas-historicas", "Lideranças históricas", "Dirigentes que marcaram a trajetória da entidade."),
-  campo: slot("05-trabalhadores-em-campo", "Trabalhadores em campo", "A categoria no dia a dia do saneamento."),
-  assembleias: slot("05-assembleias", "Assembleias", "A base reunida decidindo os rumos da luta."),
+  liderancas: slot(
+    "05-liderancas-historicas",
+    "Lideranças históricas",
+    "Dirigentes que marcaram a trajetória da entidade.",
+    undefined,
+    "Anos 90: Reunião de diretoria do Sindicato",
+  ),
+  campo: slot(
+    "05-trabalhadores-em-campo",
+    "Trabalhadores em campo",
+    "A categoria no dia a dia do saneamento.",
+    undefined,
+    "Anos 2000: Trabalhadores de Criciúma",
+  ),
+  assembleias: slot(
+    "05-assembleias",
+    "Assembleias",
+    "A base reunida decidindo os rumos da luta.",
+    undefined,
+    "1995: Assembleia regional em Florianópolis",
+  ),
   diretoriaAtual: slot("05-diretoria-atual", "Diretoria atual", "Quem conduz o Sindicato hoje."),
-  movimentos: slot("05-movimentos-sociais", "Com os movimentos sociais", "Atos, palestras e debates com a sociedade."),
+  movimentos: slot(
+    "05-movimentos-sociais",
+    "Com os movimentos sociais",
+    "Atos, palestras e debates com a sociedade.",
+    undefined,
+    "2016: Greve geral por nenhum direito a menos",
+  ),
   congresso: slot("07-1-congresso", "1º Congresso do SINTAEMA-SC", "Delegadas e delegados reunidos em Itapema."),
   sede: slot("07-sede", "Estrutura atual do Sindicato", "Sede, atendimento e equipe nos dias de hoje."),
 } satisfies Record<string, PhotoSlotInfo>;
@@ -171,19 +256,19 @@ export const conquests: Array<{ title: string; period: string; text: string; pho
     title: "Planos de Carreira e de Saúde",
     period: "Pós-1985",
     text: "A luta pelos Planos de Carreira e de Saúde e pelos Acordos e Dissídios Coletivos da categoria.",
-    photo: "greves1999",
+    photo: "assembleia2000",
   },
   {
     title: "Emprego e concurso público",
     period: "Mais de duas décadas",
     text: "Mais de duas décadas de luta pela garantia no emprego, pelo fim das terceirizações e pela contratação através de concurso público.",
-    photo: "assembleias",
+    photo: "terceirizacao",
   },
   {
     title: "Contra o neoliberalismo",
     period: "Anos 1990",
     text: "O enfrentamento das políticas neoliberais que tinham como objetivo suprimir direitos e privatizar as estatais e os serviços públicos.",
-    photo: "campo",
+    photo: "neoliberalismo",
   },
   {
     title: "Greves de 1999 a 2005",
@@ -298,6 +383,41 @@ export const milestones: Array<{
     era: "agua",
   },
 ];
+
+/* Acervo: fotos reais com as legendas originais da apresentação
+   "SINTAEMA: 40 anos de sonhos, lutas e conquistas" (2017). Arquivos em
+   /public/historia/acervo. */
+export type ArchiveDecade = "80" | "90" | "2000" | "2010";
+
+export const archive: Array<{ file: string; caption: string; decade: ArchiveDecade; width: number; height: number }> = [
+  { file: "p004", caption: "1985: Assembleia estadual", decade: "80", width: 1600, height: 1092 },
+  { file: "p009", caption: "1989: Assembleia da categoria", decade: "80", width: 1600, height: 1033 },
+  { file: "p010", caption: "Greve de 1989", decade: "80", width: 1468, height: 603 },
+  { file: "p011", caption: "1989: Categoria em greve", decade: "80", width: 1600, height: 1095 },
+  { file: "p014", caption: "1989: Greve da categoria em Joinville", decade: "80", width: 1548, height: 1038 },
+  { file: "p018", caption: "1990: Ocupação na Eletrosul", decade: "90", width: 1351, height: 876 },
+  { file: "p023", caption: "Greve de 1994", decade: "90", width: 1600, height: 977 },
+  { file: "p026", caption: "1995: Campanha contra a privatização da Casan", decade: "90", width: 1600, height: 1029 },
+  { file: "p034", caption: "Década de 90: Paralisação na Matriz", decade: "90", width: 1600, height: 1075 },
+  { file: "p037", caption: "1998: Contra a venda de ações", decade: "90", width: 1600, height: 1034 },
+  { file: "p041", caption: "1998: Contra a venda de ações — ocupação na sala do presidente", decade: "90", width: 1600, height: 1013 },
+  { file: "p045", caption: "2000: Greve em Videira", decade: "2000", width: 1387, height: 969 },
+  { file: "p051", caption: "2000: Greve em Xanxerê", decade: "2000", width: 1600, height: 1096 },
+  { file: "p061", caption: "2003: Luta contra a privatização na Alesc", decade: "2000", width: 1600, height: 1028 },
+  { file: "p074", caption: "2004: Assembleia contra a lista de demissões", decade: "2000", width: 1600, height: 1063 },
+  { file: "p082", caption: "2004: Greve contra a lista de demissões", decade: "2000", width: 1600, height: 1068 },
+  { file: "p092", caption: "2005: Trabalhadores de Içara deixam a Casan cantando o Hino Nacional", decade: "2000", width: 1600, height: 1265 },
+  { file: "p098", caption: "2007: Trabalhadores de Sombrio", decade: "2000", width: 1600, height: 1200 },
+  { file: "p099", caption: "2008: Criciúma na luta em defesa do saneamento público e do emprego", decade: "2000", width: 1600, height: 1338 },
+  { file: "p109", caption: "2011: Ato na Matriz", decade: "2010", width: 1600, height: 1200 },
+  { file: "p114", caption: "2011: Audiência pública sobre a venda das ações na Alesc", decade: "2010", width: 1600, height: 1200 },
+  { file: "p168", caption: "2016: Assembleia estadual", decade: "2010", width: 1600, height: 1069 },
+  { file: "p177", caption: "2016: Paralisação nacional", decade: "2010", width: 1600, height: 1068 },
+  { file: "p178", caption: "2017: Ato em Florianópolis", decade: "2010", width: 1600, height: 1069 },
+  { file: "p190", caption: "2017: Atividade dos 40 anos do SINTAEMA na Grande Florianópolis", decade: "2010", width: 1600, height: 1069 },
+];
+
+export const archiveSource = "Acervo SINTAEMA · apresentação “40 anos de sonhos, lutas e conquistas” (2017)";
 
 /* Cap. 07 — números (todos tirados do histórico) */
 export const numbers = [
