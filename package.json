@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "criar-admin": "node scripts/criar-admin.mjs"
   },
   "dependencies": {
     "@fontsource/oswald": "^5.3.0",
