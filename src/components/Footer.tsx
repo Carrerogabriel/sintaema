@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Company } from "@/data/companies";
-import { site } from "@/data/content";
+import { site } from "@/data/site";
 import { CompanyLogo } from "./CompanyLogo";
 import { Icon, SocialIcon } from "./Icon";
 import { Logo } from "./Logo";

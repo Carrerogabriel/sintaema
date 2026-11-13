@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { site } from "@/data/content";
+import { site } from "@/data/site";
 import { Icon } from "./Icon";
 
 const subjects = ["Fale conosco", "Filiação", "Plantão jurídico", "Ouvidoria"];

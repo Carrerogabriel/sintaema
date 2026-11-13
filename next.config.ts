@@ -6,6 +6,10 @@ const legacyPaths = ["sobre", "noticias", "agenda", "juridico", "filie-se", "con
 const nextConfig: NextConfig = {
   // Geração de PDF roda no Node, fora do bundle.
   serverExternalPackages: ["@react-pdf/renderer", "sharp"],
+  // Envio de imagens das matérias pelo painel (os documentos do acervo usam rota própria).
+  experimental: {
+    serverActions: { bodySizeLimit: "12mb" },
+  },
   async redirects() {
     return legacyPaths.flatMap((path) => [
       { source: `/${path}`, destination: "/", permanent: false },

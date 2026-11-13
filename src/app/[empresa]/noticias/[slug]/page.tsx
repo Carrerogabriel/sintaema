@@ -8,15 +8,9 @@ import { Reveal } from "@/components/Reveal";
 import { ReadingProgress } from "@/components/ScrollWidgets";
 import { ShareButtons } from "@/components/ShareButtons";
 import { Waves } from "@/components/Waves";
-import { companies, getCompany } from "@/data/companies";
-import { getPost, postsFor, relatedPosts } from "@/data/content";
+import { getCompany } from "@/data/companies";
+import { getPost, relatedPosts } from "@/data/content";
 import { categoryStyles, formatDate, readingTime } from "@/lib/format";
-
-export function generateStaticParams() {
-  return companies.flatMap((company) =>
-    postsFor(company.slug).map((post) => ({ empresa: company.slug, slug: post.slug })),
-  );
-}
 
 export async function generateMetadata({
   params,

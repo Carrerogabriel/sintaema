@@ -1,8 +1,9 @@
+import Link from "next/link";
 import { CompanyPicker } from "@/components/CompanyPicker";
 import { Icon } from "@/components/Icon";
 import { Logo } from "@/components/Logo";
 import { companies } from "@/data/companies";
-import { site } from "@/data/content";
+import { site } from "@/data/site";
 
 export default function CompanySelectPage() {
   return (
@@ -23,13 +24,22 @@ export default function CompanySelectPage() {
       <div className="container-site flex-1 pb-16 pt-8 sm:pb-20 sm:pt-12">
         <div className="flex animate-fade-in items-center justify-between gap-4">
           <Logo variant="light" />
-          <a
-            href={`tel:+554832243868`}
-            className="hidden items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-sm text-sky-100 transition hover:bg-white/10 sm:inline-flex"
-          >
-            <Icon name="phone" className="h-4 w-4 text-brand-cyan" />
-            {site.phone}
-          </a>
+          <div className="flex items-center gap-2">
+            <a
+              href={`tel:+554832243868`}
+              className="hidden items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-sm text-sky-100 transition hover:bg-white/10 sm:inline-flex"
+            >
+              <Icon name="phone" className="h-4 w-4 text-brand-cyan" />
+              {site.phone}
+            </a>
+            <Link
+              href="/entrar"
+              className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-semibold text-white ring-1 ring-white/15 transition hover:bg-white/20"
+            >
+              <Icon name="user" className="h-4 w-4 text-brand-cyan" />
+              Área restrita
+            </Link>
+          </div>
         </div>
 
         <div className="mx-auto mt-12 max-w-3xl text-center sm:mt-16">

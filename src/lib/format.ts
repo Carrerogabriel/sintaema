@@ -1,4 +1,4 @@
-import type { Category, Post } from "@/data/content";
+import type { Category, Post } from "@/data/site";
 
 export function formatDate(iso: string) {
   return new Intl.DateTimeFormat("pt-BR", {

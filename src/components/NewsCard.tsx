@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { Post } from "@/data/content";
+import type { Post } from "@/data/site";
 import { categoryStyles, formatDate, readingTime } from "@/lib/format";
 import { Icon } from "./Icon";
 

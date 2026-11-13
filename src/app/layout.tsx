@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Oswald, Source_Sans_3 } from "next/font/google";
-import { site } from "@/data/content";
+import { site } from "@/data/site";
 import "./globals.css";
 
 const sourceSans = Source_Sans_3({
