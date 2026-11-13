@@ -1,7 +1,7 @@
 /** Animated layered water waves, used at the bottom of hero sections. */
 export function Waves({
   className = "",
-  fill = "#f4fbff",
+  fill = "rgb(var(--c-surface))",
 }: {
   className?: string;
   fill?: string;
@@ -13,21 +13,21 @@ export function Waves({
       <div className="absolute inset-0 flex w-[200%] animate-wave-slow opacity-30">
         {[0, 1].map((i) => (
           <svg key={i} viewBox="0 0 1200 120" preserveAspectRatio="none" className="h-full w-1/2">
-            <path d={wave} fill={fill} />
+            <path d={wave} style={{ fill }} />
           </svg>
         ))}
       </div>
       <div className="absolute inset-0 top-3 flex w-[200%] animate-wave opacity-60 [animation-direction:reverse]">
         {[0, 1].map((i) => (
           <svg key={i} viewBox="0 0 1200 120" preserveAspectRatio="none" className="h-full w-1/2">
-            <path d={wave} fill={fill} />
+            <path d={wave} style={{ fill }} />
           </svg>
         ))}
       </div>
       <div className="absolute inset-0 top-6 flex w-[200%] animate-wave">
         {[0, 1].map((i) => (
           <svg key={i} viewBox="0 0 1200 120" preserveAspectRatio="none" className="h-full w-1/2">
-            <path d={wave} fill={fill} />
+            <path d={wave} style={{ fill }} />
           </svg>
         ))}
       </div>

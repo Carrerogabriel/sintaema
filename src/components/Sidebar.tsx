@@ -1,17 +1,19 @@
 import Link from "next/link";
-import { events } from "@/data/content";
+import type { Company } from "@/data/companies";
+import { eventsFor } from "@/data/content";
 import { formatShortDate } from "@/lib/format";
 import { Icon } from "./Icon";
 import { Reveal } from "./Reveal";
 
-export function Sidebar() {
-  const upcoming = [...events].sort((a, b) => b.date.localeCompare(a.date));
+export function Sidebar({ company }: { company: Company }) {
+  const base = `/${company.slug}`;
+  const upcoming = [...eventsFor(company.slug)].sort((a, b) => b.date.localeCompare(a.date));
 
   return (
     <aside className="grid gap-5 sm:grid-cols-2 lg:grid-cols-1 lg:content-start">
       <Reveal variant="right">
         <Link
-          href="/filie-se"
+          href={`${base}/filie-se`}
           className="group relative block overflow-hidden rounded-2xl bg-gradient-to-br from-brand-blue to-brand-cyan p-6 text-white shadow-glow-blue transition duration-500 hover:-translate-y-1"
         >
           <div className="absolute -right-8 -top-8 h-32 w-32 animate-float rounded-full bg-white/15" aria-hidden="true" />
@@ -46,7 +48,7 @@ export function Sidebar() {
             Denúncias de corrupção em sistemas municipalizados. Todos contra a privatização do
             saneamento.
           </p>
-          <Link href="/noticias?categoria=Lutas" className="link-arrow relative mt-4 !text-brand-cyan hover:!text-white">
+          <Link href={`${base}/noticias?categoria=Lutas`} className="link-arrow relative mt-4 !text-brand-cyan hover:!text-white">
             Leia as denúncias
             <Icon name="arrowRight" className="h-4 w-4" />
           </Link>
@@ -78,7 +80,7 @@ export function Sidebar() {
               );
             })}
           </ul>
-          <Link href="/agenda" className="link-arrow mt-4">
+          <Link href={`${base}/agenda`} className="link-arrow mt-4">
             Ver toda a agenda
             <Icon name="arrowRight" className="h-4 w-4" />
           </Link>
@@ -86,7 +88,7 @@ export function Sidebar() {
       </Reveal>
 
       <Reveal variant="right" delay={240}>
-        <Link href="/contato" className="card card-hover group flex items-center gap-4 p-5">
+        <Link href={`${base}/contato`} className="card card-hover group flex items-center gap-4 p-5">
           <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-brand-sand text-brand-blue transition group-hover:bg-brand-blue group-hover:text-white">
             <Icon name="megaphone" />
           </span>

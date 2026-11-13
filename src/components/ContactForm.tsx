@@ -6,7 +6,7 @@ import { Icon } from "./Icon";
 
 const subjects = ["Fale conosco", "Filiação", "Plantão jurídico", "Ouvidoria"];
 
-export function ContactForm() {
+export function ContactForm({ companyName }: { companyName?: string }) {
   const [sent, setSent] = useState(false);
   const [subject, setSubject] = useState(subjects[0]);
 
@@ -17,7 +17,8 @@ export function ContactForm() {
     const email = String(data.get("email") ?? "");
     const message = String(data.get("mensagem") ?? "");
     const body = encodeURIComponent(`Nome: ${name}\nE-mail: ${email}\n\n${message}`);
-    window.location.href = `mailto:${site.email}?subject=${encodeURIComponent(subject)}&body=${body}`;
+    const fullSubject = companyName ? `[${companyName}] ${subject}` : subject;
+    window.location.href = `mailto:${site.email}?subject=${encodeURIComponent(fullSubject)}&body=${body}`;
     setSent(true);
   }
 

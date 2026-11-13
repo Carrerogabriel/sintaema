@@ -1,5 +1,7 @@
 import Link from "next/link";
+import type { Company } from "@/data/companies";
 import { site } from "@/data/content";
+import { CompanyLogo } from "./CompanyLogo";
 import { Icon, SocialIcon } from "./Icon";
 import { Logo } from "./Logo";
 import { Reveal } from "./Reveal";
@@ -19,7 +21,8 @@ const socials = [
   { network: "youtube" as const, href: site.social.youtube, label: "YouTube" },
 ];
 
-export function Footer() {
+export function Footer({ company }: { company: Company }) {
+  const base = `/${company.slug}`;
   return (
     <footer className="relative mt-20 bg-brand-navy-dark text-sky-100 md:mt-28">
       {/* CTA band overlapping the footer */}
@@ -37,16 +40,16 @@ export function Footer() {
                 Filie-se ao Sintaema
               </h2>
               <p className="mt-2 max-w-xl text-green-50">
-                Defesa jurídica, informação e organização coletiva. Contribuição de{" "}
+                Trabalhador(a) da {company.name}: defesa jurídica, informação e organização coletiva. Contribuição de{" "}
                 {site.contribution}.
               </p>
             </div>
             <div className="relative mt-6 flex flex-wrap gap-3 md:mt-0 md:shrink-0">
-              <Link href="/filie-se" className="btn bg-white text-brand-green-dark hover:-translate-y-0.5 hover:shadow-xl">
+              <Link href={`${base}/filie-se`} className="btn bg-white text-brand-green-dark hover:-translate-y-0.5 hover:shadow-xl">
                 Quero me filiar
                 <Icon name="arrowRight" className="h-4 w-4" />
               </Link>
-              <Link href="/contato" className="btn-ghost">
+              <Link href={`${base}/contato`} className="btn-ghost">
                 Tirar dúvidas
               </Link>
             </div>
@@ -56,11 +59,21 @@ export function Footer() {
 
       <div className="container-site -mt-4 grid gap-10 pb-12 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div className="sm:col-span-2 lg:col-span-1">
-          <Logo variant="light" />
+          <div className="flex flex-wrap items-center gap-4">
+            <Logo variant="light" />
+            <CompanyLogo company={company} size="sm" />
+          </div>
           <p className="mt-5 max-w-sm text-sm leading-relaxed text-sky-100/80">{site.fullName}.</p>
           <p className="mt-5 font-display text-lg uppercase tracking-wide text-brand-green">
             {site.slogan}
           </p>
+          <Link
+            href="/"
+            className="group mt-4 inline-flex items-center gap-2 text-sm font-semibold text-white transition hover:text-brand-cyan"
+          >
+            <Icon name="arrowLeft" className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
+            Escolher outra empresa
+          </Link>
           <div className="mt-5 flex gap-2">
             {socials.map((social) => (
               <a
@@ -83,7 +96,7 @@ export function Footer() {
             {links.map((link) => (
               <li key={link.href}>
                 <Link
-                  href={link.href}
+                  href={`${base}${link.href}`}
                   className="group inline-flex items-center gap-2 text-sky-100/80 transition hover:text-white"
                 >
                   <span className="h-px w-0 bg-brand-green transition-all duration-300 group-hover:w-3" />

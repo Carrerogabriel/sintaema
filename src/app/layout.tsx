@@ -1,8 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Oswald, Source_Sans_3 } from "next/font/google";
-import { Footer } from "@/components/Footer";
-import { Header } from "@/components/Header";
-import { BackToTop } from "@/components/ScrollWidgets";
 import { site } from "@/data/content";
 import "./globals.css";
 
@@ -51,10 +48,7 @@ export default function RootLayout({
         >
           Pular para o conteúdo
         </a>
-        <Header />
-        <main id="conteudo">{children}</main>
-        <Footer />
-        <BackToTop />
+        {children}
       </body>
     </html>
   );

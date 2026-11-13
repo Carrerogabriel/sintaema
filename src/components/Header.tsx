@@ -3,7 +3,9 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { FormEvent, useEffect, useRef, useState } from "react";
+import type { Company } from "@/data/companies";
 import { site } from "@/data/content";
+import { CompanyLogo } from "./CompanyLogo";
 import { Icon, SocialIcon } from "./Icon";
 import { Logo } from "./Logo";
 
@@ -30,7 +32,17 @@ function isActive(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
-export function Header() {
+function SwitchCompany({ className = "", onClick }: { className?: string; onClick?: () => void }) {
+  return (
+    <Link href="/" onClick={onClick} className={className}>
+      <Icon name="arrowLeft" className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
+      Trocar empresa
+    </Link>
+  );
+}
+
+export function Header({ company }: { company: Company }) {
+  const base = `/${company.slug}`;
   const router = useRouter();
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -76,7 +88,7 @@ export function Header() {
 
   function runSearch(term: string) {
     const query = term.trim();
-    router.push(query ? `/busca?q=${encodeURIComponent(query)}` : "/busca");
+    router.push(query ? `${base}/busca?q=${encodeURIComponent(query)}` : `${base}/busca`);
     setSearchOpen(false);
     setMenuOpen(false);
   }
@@ -111,9 +123,11 @@ export function Header() {
               </span>
             </div>
             <div className="flex items-center gap-4">
-              <p className="hidden font-display uppercase tracking-wider text-brand-green xl:block">
-                {site.slogan}
+              <p className="hidden items-center gap-2 lg:flex">
+                <span className="text-sky-200/70">Você está em:</span>
+                <strong className="font-semibold text-white">{company.name}</strong>
               </p>
+              <SwitchCompany className="group inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 font-semibold text-white transition hover:bg-white/20" />
               <div className="flex items-center gap-1">
                 {socials.map((social) => (
                   <a
@@ -145,18 +159,21 @@ export function Header() {
               scrolled ? "py-2" : "py-3 md:py-4"
             }`}
           >
-            <Link href="/" className="mr-auto shrink-0" aria-label="Página inicial do SINTAEMA">
-              <Logo compact={scrolled} />
+            <Link href={base} className="mr-auto flex shrink-0 items-center gap-3" aria-label={`Página inicial do SINTAEMA · ${company.name}`}>
+              <Logo compact={scrolled} className="max-[399px]:[&>div]:hidden [&>div>p:last-child]:hidden sm:[&>div>p:last-child]:block" />
+              <span className="h-8 w-px bg-slate-200" aria-hidden="true" />
+              <CompanyLogo company={company} size="sm" className="!h-9" />
             </Link>
 
             <nav aria-label="Menu principal" className="hidden xl:block">
               <ul className="flex items-center gap-1">
                 {nav.map((item) => {
-                  const active = isActive(pathname, item.href);
+                  const href = `${base}${item.href}`;
+                  const active = isActive(pathname, href);
                   return (
                     <li key={item.label}>
                       <Link
-                        href={item.href}
+                        href={href}
                         aria-current={active ? "page" : undefined}
                         className={`group relative block rounded-full px-3.5 py-2 text-sm font-semibold transition-colors ${
                           active ? "text-brand-green" : "text-brand-navy hover:text-brand-blue"
@@ -197,7 +214,7 @@ export function Header() {
               <Icon name="search" />
             </button>
 
-            <Link href="/filie-se" className="btn-primary hidden !px-5 !py-2.5 sm:inline-flex">
+            <Link href={`${base}/filie-se`} className="btn-primary hidden !px-5 !py-2.5 sm:inline-flex">
               <Icon name="heart" className="h-4 w-4" />
               Filie-se
             </Link>
@@ -237,7 +254,10 @@ export function Header() {
           }`}
         >
           <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
-            <Logo variant="light" compact />
+            <span className="flex items-center gap-3">
+              <Logo variant="light" compact />
+              <CompanyLogo company={company} size="sm" className="!h-8" />
+            </span>
             <button
               type="button"
               onClick={() => setMenuOpen(false)}
@@ -261,8 +281,9 @@ export function Header() {
 
           <nav aria-label="Menu móvel" className="mt-4 flex-1 px-3">
             <ul>
-              {[{ href: "/", label: "Início" }, ...nav].map((item, index) => {
-                const active = item.href === "/" ? pathname === "/" : isActive(pathname, item.href);
+              {[{ href: "", label: "Início" }, ...nav].map((item, index) => {
+                const href = `${base}${item.href}`;
+                const active = item.href === "" ? pathname === base : isActive(pathname, href);
                 return (
                   <li
                     key={item.label}
@@ -272,7 +293,7 @@ export function Header() {
                     style={{ transitionDelay: menuOpen ? `${120 + index * 45}ms` : "0ms" }}
                   >
                     <Link
-                      href={item.href}
+                      href={href}
                       onClick={() => setMenuOpen(false)}
                       className={`flex items-center justify-between rounded-xl px-4 py-3.5 font-display text-xl uppercase tracking-wide transition ${
                         active ? "bg-white/10 text-brand-green" : "hover:bg-white/5 hover:pl-5"
@@ -288,7 +309,11 @@ export function Header() {
           </nav>
 
           <div className="mt-6 space-y-4 border-t border-white/10 p-5">
-            <Link href="/filie-se" onClick={() => setMenuOpen(false)} className="btn-primary w-full">
+            <SwitchCompany
+              onClick={() => setMenuOpen(false)}
+              className="btn-ghost group w-full"
+            />
+            <Link href={`${base}/filie-se`} onClick={() => setMenuOpen(false)} className="btn-primary w-full">
               <Icon name="heart" className="h-4 w-4" />
               Filie-se agora
             </Link>

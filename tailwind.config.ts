@@ -1,5 +1,8 @@
 import type { Config } from "tailwindcss";
 
+/** Theme colors come from CSS variables so each company can recolor the site. */
+const v = (name: string) => `rgb(var(--c-${name}) / <alpha-value>)`;
+
 const config: Config = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -10,17 +13,17 @@ const config: Config = {
     extend: {
       colors: {
         brand: {
-          green: "#1aaa4a",
-          "green-dark": "#148a3b",
-          "green-light": "#e8f7ee",
-          navy: "#0b2e5c",
-          "navy-dark": "#071d3b",
-          "navy-light": "#13407a",
-          blue: "#0090d0",
-          cyan: "#00bcd4",
-          water: "#d9f0fa",
-          sand: "#f4fbff",
-          ink: "#16324f",
+          green: v("accent"),
+          "green-dark": v("accent-dark"),
+          "green-light": v("accent-light"),
+          navy: v("primary"),
+          "navy-dark": v("primary-dark"),
+          "navy-light": v("primary-light"),
+          blue: v("secondary"),
+          cyan: v("highlight"),
+          water: v("tint"),
+          sand: v("surface"),
+          ink: v("ink"),
         },
       },
       fontFamily: {
@@ -30,8 +33,8 @@ const config: Config = {
       boxShadow: {
         card: "0 1px 2px rgba(11, 46, 92, 0.04), 0 8px 24px rgba(11, 46, 92, 0.07)",
         "card-hover": "0 2px 4px rgba(11, 46, 92, 0.05), 0 20px 40px rgba(11, 46, 92, 0.14)",
-        glow: "0 10px 30px -8px rgba(26, 170, 74, 0.55)",
-        "glow-blue": "0 10px 30px -8px rgba(0, 144, 208, 0.55)",
+        glow: "0 10px 30px -8px rgb(var(--c-accent) / 0.55)",
+        "glow-blue": "0 10px 30px -8px rgb(var(--c-secondary) / 0.55)",
       },
       keyframes: {
         "fade-up": {
