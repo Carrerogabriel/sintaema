@@ -11,7 +11,12 @@ import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import { seedBulletins, seedEvents, seedPosts } from "./seed";
 
-export const DATA_DIR = path.resolve(process.env.SINTAEMA_DATA_DIR ?? path.join(process.cwd(), "storage"));
+/**
+ * Na Vercel a pasta do projeto é somente leitura: lá o único lugar gravável é /tmp,
+ * que é temporário (os dados voltam ao conteúdo inicial quando o servidor reinicia).
+ */
+const defaultDataDir = process.env.VERCEL ? "/tmp/sintaema" : path.join(process.cwd(), "storage");
+export const DATA_DIR = path.resolve(process.env.SINTAEMA_DATA_DIR ?? defaultDataDir);
 export const ARCHIVE_DIR = path.join(DATA_DIR, "acervo");
 export const MEDIA_DIR = path.join(DATA_DIR, "midia");
 
