@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { Icon } from "./Icon";
 import { Waves } from "./Waves";
+import { DropRipples, UnderwaterScene } from "./water/WaterFx";
 
 type Crumb = { href?: string; label: string };
 
@@ -22,7 +23,8 @@ export function PageHero({
 }) {
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-brand-navy-dark via-brand-navy to-brand-navy-light pb-20 pt-10 text-white md:pb-28 md:pt-14">
-      <div className="bg-grid absolute inset-0 opacity-60" aria-hidden="true" />
+      <UnderwaterScene bubbles={12} seed={2} />
+      <DropRipples count={3} seed={6} className="left-1/3" />
       <div
         className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-brand-blue/30 blur-3xl md:h-96 md:w-96"
         aria-hidden="true"

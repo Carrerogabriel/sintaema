@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState, type MouseEvent } from "react";
 import type { Company } from "@/data/companies";
 import { Icon } from "./Icon";
+import { Bubbles, MovingWave } from "./water/WaterFx";
 
 const STORAGE_KEY = "sintaema:empresa";
 
@@ -102,12 +103,25 @@ export function CompanyPicker({ companies }: { companies: Company[] }) {
                 className="absolute inset-y-0 -left-1/2 w-1/3 -skew-x-12 bg-white/15 opacity-0 transition-all duration-700 group-hover:left-[120%] group-hover:opacity-100"
                 aria-hidden="true"
               />
-              {/* accent bar */}
+              {/* água no fundo do card: sobe ao passar o mouse */}
               <span
-                className="absolute inset-x-0 bottom-0 h-1.5 origin-left scale-x-[0.25] transition-transform duration-500 group-hover:scale-x-100"
-                style={{ backgroundColor: company.colors.accent }}
+                className="absolute inset-x-0 bottom-0 h-full translate-y-[86%] transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-y-[38%] group-focus-visible:translate-y-[38%]"
                 aria-hidden="true"
-              />
+              >
+                <MovingWave
+                  fill={`${company.colors.secondary}55`}
+                  variant="b"
+                  className="!bottom-auto top-0 h-10 animate-wave-slow sm:h-14"
+                />
+                <MovingWave
+                  fill={`${company.colors.accent}cc`}
+                  className="!bottom-auto top-2 h-10 animate-wave [animation-duration:7s] sm:h-14"
+                />
+                <span className="absolute inset-x-0 bottom-0 top-[30px] sm:top-[44px]" style={{ backgroundColor: `${company.colors.accent}cc` }} />
+              </span>
+              <span className="absolute inset-0 opacity-0 transition-opacity duration-700 group-hover:opacity-100" aria-hidden="true">
+                <Bubbles count={7} seed={index + 3} rise="260px" />
+              </span>
 
               {company.logo ? (
                 <span className="relative flex h-[55%] w-[88%] rounded-xl bg-white p-2 shadow-lg ring-1 ring-black/5 transition-transform duration-500 group-hover:scale-[1.04] sm:rounded-2xl sm:p-3">
@@ -147,20 +161,36 @@ export function CompanyPicker({ companies }: { companies: Company[] }) {
         ))}
       </ul>
 
-      {/* Color transition into the chosen company's portal */}
+      {/* Transição: a água da empresa escolhida sobe e inunda a tela */}
       {selection ? (
         <div
-          className="fixed inset-0 z-[80] grid place-items-center text-white"
-          style={{
-            backgroundImage: `linear-gradient(145deg, ${selection.company.colors.primary}, ${selection.company.colors.secondary})`,
-            clipPath: `circle(${selection.expanded ? "150%" : "0px"} at ${selection.x}px ${selection.y}px)`,
-            transition: "clip-path 700ms cubic-bezier(0.65, 0, 0.35, 1)",
-          }}
+          className="fixed inset-0 z-[80] grid place-items-center overflow-hidden text-white"
           role="status"
           aria-live="polite"
         >
           <div
-            className={`text-center transition-all delay-200 duration-500 ${
+            className="absolute inset-x-0 -top-16 bottom-0"
+            style={{
+              transform: `translateY(${selection.expanded ? "0%" : "105%"})`,
+              transition: "transform 800ms cubic-bezier(0.65, 0, 0.35, 1)",
+            }}
+            aria-hidden="true"
+          >
+            <div className="absolute inset-x-0 top-0 h-20 overflow-hidden">
+              <MovingWave fill={`${selection.company.colors.secondary}99`} variant="b" className="h-full animate-wave [animation-duration:3s]" />
+              <MovingWave fill={selection.company.colors.primary} className="h-full animate-wave [animation-direction:reverse] [animation-duration:4s]" />
+            </div>
+            <div
+              className="absolute inset-x-0 bottom-0 top-[79px]"
+              style={{
+                backgroundImage: `linear-gradient(170deg, ${selection.company.colors.primary} 30%, ${selection.company.colors.secondary})`,
+              }}
+            >
+              <Bubbles count={16} seed={21} />
+            </div>
+          </div>
+          <div
+            className={`relative text-center transition-all delay-300 duration-500 ${
               selection.expanded ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
             }`}
           >

@@ -47,11 +47,10 @@ export function ReadingProgress() {
   }, []);
 
   return (
-    <div className="fixed inset-x-0 top-0 z-[60] h-1 bg-transparent" aria-hidden="true">
-      <div
-        className="h-full origin-left bg-gradient-to-r from-brand-green via-brand-cyan to-brand-blue"
-        style={{ transform: `scaleX(${progress})` }}
-      />
+    <div className="fixed inset-x-0 top-0 z-[60] h-1.5 bg-brand-navy/10" aria-hidden="true">
+      <div className="relative h-full overflow-hidden rounded-r-full" style={{ width: `${progress * 100}%` }}>
+        <div className="pipe-water-x absolute inset-0" />
+      </div>
     </div>
   );
 }

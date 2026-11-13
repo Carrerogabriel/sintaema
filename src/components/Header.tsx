@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { FormEvent, useEffect, useRef, useState } from "react";
 import type { Company } from "@/data/companies";
-import { site } from "@/data/content";
+import { site } from "@/data/site";
 import { CompanyLogo } from "./CompanyLogo";
 import { Icon, SocialIcon } from "./Icon";
 import { Logo } from "./Logo";
@@ -128,6 +128,10 @@ export function Header({ company }: { company: Company }) {
                 <strong className="font-semibold text-white">{company.name}</strong>
               </p>
               <SwitchCompany className="group inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 font-semibold text-white transition hover:bg-white/20" />
+              <Link href="/entrar" className="inline-flex items-center gap-1.5 font-semibold text-sky-100 transition hover:text-white">
+                <Icon name="user" className="h-3.5 w-3.5 text-brand-cyan" />
+                Área restrita
+              </Link>
               <div className="flex items-center gap-1">
                 {socials.map((social) => (
                   <a

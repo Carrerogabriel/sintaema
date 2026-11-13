@@ -1,10 +1,11 @@
 import Link from "next/link";
 import type { Company } from "@/data/companies";
-import { site } from "@/data/content";
+import { site } from "@/data/site";
 import { CompanyLogo } from "./CompanyLogo";
 import { Icon, SocialIcon } from "./Icon";
 import { Logo } from "./Logo";
 import { Reveal } from "./Reveal";
+import { Bubbles, Caustics, WaveEdge } from "./water/WaterFx";
 
 const links = [
   { href: "/sobre", label: "O Sindicato" },
@@ -24,7 +25,12 @@ const socials = [
 export function Footer({ company }: { company: Company }) {
   const base = `/${company.slug}`;
   return (
-    <footer className="relative mt-20 bg-brand-navy-dark text-sky-100 md:mt-28">
+    <footer className="relative isolate mt-20 bg-brand-navy-dark text-sky-100 md:mt-28">
+      <WaveEdge position="top" className="-z-10" />
+      <div className="absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
+        <Caustics className="!opacity-[0.12]" />
+        <Bubbles count={10} seed={41} rise="700px" />
+      </div>
       {/* CTA band overlapping the footer */}
       <div className="container-site relative -top-12 md:-top-16">
         <Reveal variant="scale">

@@ -8,15 +8,10 @@ import { Reveal } from "@/components/Reveal";
 import { ReadingProgress } from "@/components/ScrollWidgets";
 import { ShareButtons } from "@/components/ShareButtons";
 import { Waves } from "@/components/Waves";
-import { companies, getCompany } from "@/data/companies";
-import { getPost, postsFor, relatedPosts } from "@/data/content";
+import { DropDivider, DropRipples, MovingWave, UnderwaterScene } from "@/components/water/WaterFx";
+import { getCompany } from "@/data/companies";
+import { getPost, relatedPosts } from "@/data/content";
 import { categoryStyles, formatDate, readingTime } from "@/lib/format";
-
-export function generateStaticParams() {
-  return companies.flatMap((company) =>
-    postsFor(company.slug).map((post) => ({ empresa: company.slug, slug: post.slug })),
-  );
-}
 
 export async function generateMetadata({
   params,
@@ -59,6 +54,10 @@ export default async function PostPage({
           sizes="100vw"
         />
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-brand-navy-dark/70 via-brand-navy-dark/85 to-brand-navy-dark" />
+        <div className="absolute inset-0 -z-10" aria-hidden="true">
+          <UnderwaterScene bubbles={12} seed={8} />
+          <DropRipples count={3} seed={12} />
+        </div>
 
         <div className="container-site">
           <nav aria-label="Trilha de navegação" className="animate-fade-in">
@@ -124,6 +123,8 @@ export default async function PostPage({
               className="object-cover"
               sizes="(min-width: 1024px) 1024px, 100vw"
             />
+            <MovingWave fill="rgb(var(--c-secondary) / 0.25)" variant="b" className="h-10 animate-wave [animation-duration:12s] md:h-14" />
+            <MovingWave fill="rgb(var(--c-primary) / 0.35)" className="h-8 animate-wave-slow [animation-direction:reverse] md:h-12" />
           </div>
           <p className="mt-2 text-center text-xs text-slate-500">{post.imageAlt}</p>
         </div>
@@ -135,7 +136,9 @@ export default async function PostPage({
             ))}
           </div>
 
-          <div className="mt-10 flex flex-col gap-4 border-y border-brand-navy/10 py-6 sm:flex-row sm:items-center sm:justify-between">
+          <DropDivider className="mt-10" />
+
+          <div className="mt-8 flex flex-col gap-4 border-y border-brand-navy/10 py-6 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-sm font-semibold uppercase tracking-wide text-brand-navy">
               Compartilhe esta matéria
             </p>

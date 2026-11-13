@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { Post } from "@/data/content";
+import type { Post } from "@/data/site";
 import { categoryStyles, formatDate, readingTime } from "@/lib/format";
 import { Icon } from "./Icon";
+import { MovingWave } from "./water/WaterFx";
 
 export function NewsCard({
   post,
@@ -36,6 +37,17 @@ export function NewsCard({
             sizes={horizontal ? "160px" : "(min-width: 1280px) 400px, (min-width: 640px) 50vw, 100vw"}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-brand-navy-dark/50 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+          {/* água sobe pela foto ao passar o mouse; a borda inferior é uma onda */}
+          <span
+            className="absolute inset-x-0 bottom-0 h-full translate-y-full transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-y-[62%]"
+            aria-hidden="true"
+          >
+            <MovingWave fill="rgb(var(--c-secondary) / 0.35)" variant="b" className="!bottom-auto -top-5 h-8 animate-wave [animation-duration:6s]" />
+            <span className="absolute inset-0 top-[11px] bg-brand-blue/35" />
+          </span>
+          {!horizontal ? (
+            <MovingWave fill="#fff" className="!-bottom-px h-4 animate-wave-slow sm:h-5" />
+          ) : null}
           {!horizontal ? (
             <span
               className={`absolute left-3 top-3 rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-wide shadow-md ${categoryStyles[post.category]}`}

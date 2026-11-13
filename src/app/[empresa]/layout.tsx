@@ -2,15 +2,12 @@ import type { Metadata } from "next";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { BackToTop } from "@/components/ScrollWidgets";
-import { companies, getCompany } from "@/data/companies";
+import { getCompany } from "@/data/companies";
 import { resolveCompany } from "@/lib/company";
 import { themeVars } from "@/lib/theme";
 
-export const dynamicParams = false;
-
-export function generateStaticParams() {
-  return companies.map((company) => ({ empresa: company.slug }));
-}
+// Conteúdo vem do banco e é editado pelo painel: renderiza a cada acesso.
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({
   params,
