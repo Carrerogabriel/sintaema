@@ -127,7 +127,7 @@ export function PostForm({ values, companies }: { values: PostFormValues; compan
       </div>
 
       {/* Side column */}
-      <aside className="grid h-fit animate-fade-up gap-5 [animation-delay:100ms] lg:sticky lg:top-6">
+      <aside className="grid h-fit animate-fade-up gap-5 [animation-delay:100ms]">
         <section className="card grid gap-4 p-5">
           <fieldset>
             <legend className="mb-2 text-sm font-semibold text-brand-navy">Situação</legend>
