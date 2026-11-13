@@ -6,7 +6,8 @@ import { Icon, type IconName } from "@/components/Icon";
 import { NewsCard } from "@/components/NewsCard";
 import { Reveal } from "@/components/Reveal";
 import { Sidebar } from "@/components/Sidebar";
-import { Waves } from "@/components/Waves";
+import { Bubbles, Caustics, DropRipples, MovingWave, Ocean, UnderwaterScene } from "@/components/water/WaterFx";
+import { WaterJourney } from "@/components/water/WaterJourney";
 import { bulletinsFor, postsFor, site } from "@/data/content";
 import { resolveCompany, type CompanyParams } from "@/lib/company";
 import { categoryStyles, formatDate } from "@/lib/format";
@@ -60,19 +61,20 @@ export default async function CompanyHomePage({ params }: CompanyParams) {
       <section className="relative isolate overflow-hidden bg-brand-navy-dark text-white">
         <div className="absolute inset-0 -z-10">
           <Image
-            src={featured.image}
+            src="/images/natureza.jpg"
             alt=""
             fill
             priority
-            className="animate-ken-burns object-cover opacity-40"
+            className="animate-ken-burns object-cover opacity-45"
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-brand-navy-dark via-brand-navy-dark/90 to-brand-navy/50" />
-          <div className="absolute inset-0 bg-gradient-to-t from-brand-navy-dark via-transparent to-transparent" />
-          <div className="bg-grid absolute inset-0 opacity-40" />
+          <div className="absolute inset-0 bg-gradient-to-r from-brand-navy-dark via-brand-navy-dark/85 to-brand-navy/40" />
+          <div className="absolute inset-0 bg-gradient-to-t from-brand-navy-dark via-transparent to-brand-blue/20" />
+          <UnderwaterScene bubbles={16} seed={5} />
+          <DropRipples count={4} seed={9} className="left-1/2" />
         </div>
 
-        <div className="container-site grid gap-10 pb-28 pt-10 sm:pt-14 md:pb-36 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] lg:items-center lg:gap-14 lg:pt-20">
+        <div className="container-site grid gap-10 pb-36 pt-10 sm:pt-14 md:pb-48 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] lg:items-center lg:gap-14 lg:pt-20">
           <div>
             <div className="flex animate-fade-up flex-wrap items-center gap-4">
               <CompanyLogo company={company} size="md" />
@@ -143,7 +145,7 @@ export default async function CompanyHomePage({ params }: CompanyParams) {
             ))}
           </div>
         </div>
-        <Waves />
+        <Ocean />
       </section>
 
       {/* STATS */}
@@ -151,11 +153,16 @@ export default async function CompanyHomePage({ params }: CompanyParams) {
         <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
           {stats.map((stat, index) => (
             <Reveal key={stat.label} delay={index * 90}>
-              <div className="card card-hover h-full p-5 text-center sm:p-6">
-                <p className="font-display text-4xl font-semibold text-brand-navy sm:text-5xl">
+              <div className="card card-hover relative h-full overflow-hidden p-5 text-center sm:p-6">
+                <span className="tank-fill absolute inset-x-0 bottom-0 h-[38%]" aria-hidden="true">
+                  <MovingWave fill="rgb(var(--c-highlight) / 0.14)" variant="b" className="!bottom-auto top-0 h-8 animate-wave-slow" />
+                  <MovingWave fill="rgb(var(--c-secondary) / 0.12)" className="!bottom-auto top-1.5 h-8 animate-wave [animation-duration:9s]" />
+                  <span className="absolute inset-x-0 bottom-0 top-7 bg-brand-blue/[0.12]" />
+                </span>
+                <p className="relative font-display text-4xl font-semibold text-brand-navy sm:text-5xl">
                   <CountUp value={stat.value} suffix={stat.suffix} />
                 </p>
-                <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-slate-500 sm:text-sm">
+                <p className="relative mt-1 text-xs font-semibold uppercase tracking-wide text-slate-500 sm:text-sm">
                   {stat.label}
                 </p>
               </div>
@@ -170,6 +177,9 @@ export default async function CompanyHomePage({ params }: CompanyParams) {
           <div className="card grid overflow-hidden lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
             <div className="relative flex flex-col justify-between gap-8 overflow-hidden bg-gradient-to-br from-brand-navy to-brand-blue p-7 text-white sm:p-10">
               <div className="absolute -right-16 -top-16 h-56 w-56 animate-float rounded-full bg-white/10" aria-hidden="true" />
+              <Bubbles count={10} seed={17} rise="520px" />
+              <MovingWave fill="rgb(255 255 255 / 0.08)" className="h-16 animate-wave-slow" />
+              <MovingWave fill="rgb(255 255 255 / 0.08)" variant="b" className="h-12 animate-wave [animation-duration:10s]" />
               <div className="relative">
                 <p className="eyebrow text-brand-cyan">A empresa</p>
                 <h2 className="mt-3 font-display text-3xl font-semibold uppercase leading-tight sm:text-4xl">
@@ -231,8 +241,13 @@ export default async function CompanyHomePage({ params }: CompanyParams) {
         <Sidebar company={company} />
       </section>
 
+      {/* CAMINHO DA ÁGUA */}
+      <div className="mt-20 md:mt-28">
+        <WaterJourney companyName={company.name} />
+      </div>
+
       {/* SERVICES */}
-      <section className="relative mt-20 overflow-hidden bg-white py-16 md:mt-28 md:py-24">
+      <section className="relative overflow-hidden bg-white pb-16 pt-4 md:pb-24">
         <div className="container-site">
           <Reveal className="mx-auto max-w-2xl text-center">
             <p className="eyebrow justify-center text-brand-green">Como atuamos</p>
@@ -249,8 +264,16 @@ export default async function CompanyHomePage({ params }: CompanyParams) {
               <Reveal key={service.title} delay={index * 90}>
                 <Link
                   href={`${base}${service.path}`}
-                  className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-slate-100 bg-brand-sand/60 p-6 transition duration-500 hover:-translate-y-1 hover:border-transparent hover:bg-brand-navy hover:shadow-card-hover"
+                  className="group relative isolate flex h-full flex-col overflow-hidden rounded-2xl border border-slate-100 bg-brand-sand/60 p-6 transition duration-500 hover:-translate-y-1 hover:border-transparent hover:shadow-card-hover"
                 >
+                  <span
+                    className="absolute inset-x-0 -bottom-16 top-0 -z-10 translate-y-full transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-y-[10%] group-focus-visible:translate-y-[10%]"
+                    aria-hidden="true"
+                  >
+                    <MovingWave fill="rgb(var(--c-secondary) / 0.6)" variant="b" className="!bottom-auto -top-6 h-10 animate-wave [animation-duration:5s]" />
+                    <MovingWave fill="rgb(var(--c-primary))" className="!bottom-auto -top-5 h-10 animate-wave [animation-direction:reverse] [animation-duration:7s]" />
+                    <span className="absolute inset-x-0 bottom-0 top-[14px] bg-brand-navy" />
+                  </span>
                   <span className="grid h-14 w-14 place-items-center rounded-2xl bg-white text-brand-blue shadow-card transition duration-500 group-hover:rotate-[-6deg] group-hover:scale-110 group-hover:bg-brand-green group-hover:text-white">
                     <Icon name={service.icon} className="h-6 w-6" />
                   </span>
@@ -307,13 +330,17 @@ export default async function CompanyHomePage({ params }: CompanyParams) {
         <Reveal variant="scale">
           <div className="relative isolate overflow-hidden rounded-3xl bg-brand-navy px-6 py-14 text-center text-white sm:px-12 md:py-20">
             <Image
-              src="/images/agua.jpg"
+              src="/images/natureza.jpg"
               alt=""
               fill
-              className="-z-10 object-cover opacity-30"
+              className="-z-10 object-cover opacity-35"
               sizes="(min-width: 1280px) 1216px, 100vw"
             />
             <div className="absolute inset-0 -z-10 bg-gradient-to-t from-brand-navy-dark via-brand-navy/70 to-brand-blue/40" />
+            <Caustics className="-z-10" />
+            <Bubbles count={12} seed={29} rise="600px" className="-z-10" />
+            <DropRipples count={3} seed={13} className="-z-10" />
+            <MovingWave fill="rgb(255 255 255 / 0.07)" className="-z-10 h-20 animate-wave-slow" />
             <Icon name="drop" className="mx-auto h-10 w-10 animate-float text-brand-cyan" />
             <p className="mt-4 text-xs font-bold uppercase tracking-[0.25em] text-brand-green">
               Lema da entidade
