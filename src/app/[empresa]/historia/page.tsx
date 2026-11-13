@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { Source_Serif_4 } from "next/font/google";
+import { Archive } from "@/components/historia/Archive";
 import { Battles } from "@/components/historia/Battles";
 import { ChapterNav } from "@/components/historia/ChapterNav";
 import { Closing } from "@/components/historia/Closing";
@@ -66,6 +67,7 @@ export default async function HistoryPage({ params }: { params: Promise<{ empres
       <Conquests photos={photos} />
       <People photos={photos} base={base} />
       <Timeline photos={photos} />
+      <Archive />
       <Present photos={photos} years={years} base={base} />
       <Closing base={base} />
     </div>

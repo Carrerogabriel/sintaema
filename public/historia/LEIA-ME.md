@@ -45,3 +45,18 @@ O prefixo indica o capítulo (00 = abertura, 01 = anos de chumbo, 02 = fundaçã
 - Para nomes e legendas (ex.: primeira diretoria), edite o texto do espaço
   correspondente em `src/data/historia.ts` (campos `label` e `alt`).
 - Depois de adicionar fotos, reinicie o servidor ou faça um novo deploy.
+
+## Fotos já inseridas (novembro de 2026)
+
+As fotos vieram da apresentação **"SINTAEMA: 40 anos de sonhos, lutas e
+conquistas" (2017)**, com as legendas originais de cada slide. Cada foto mostra
+a sua legenda na página e no PDF.
+
+- **Todos os espaços têm foto.** Onde a apresentação não tinha imagem da época
+  (anos 1970, 1975, fundação de 1977, primeira diretoria, fundadores, diretoria
+  atual, 1º Congresso e sede), foi usada a foto mais próxima do acervo, sempre
+  com a **legenda original e o ano real** visíveis. Quando aparecerem fotos
+  dessas épocas, basta substituir o arquivo com o mesmo nome e ajustar a
+  legenda (`caption`) em `src/data/historia.ts`.
+- A galeria "Acervo" usa as fotos de `acervo/` (lista e legendas em
+  `src/data/historia.ts`, constante `archive`).
