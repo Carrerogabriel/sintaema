@@ -3,8 +3,8 @@ import { redirect } from "next/navigation";
 import { Icon } from "@/components/Icon";
 import { Logo } from "@/components/Logo";
 import { site } from "@/data/site";
-import { countUsers, currentUser, roleHome } from "@/server/auth";
-import { LoginForm, SetupForm } from "./LoginForms";
+import { currentUser, roleHome } from "@/server/auth";
+import { LoginForm } from "./LoginForms";
 
 export const metadata = { title: "Entrar" };
 export const dynamic = "force-dynamic";
@@ -12,7 +12,6 @@ export const dynamic = "force-dynamic";
 export default async function LoginPage() {
   const user = await currentUser();
   if (user) redirect(roleHome[user.role]);
-  const firstRun = countUsers() === 0;
 
   return (
     <main id="conteudo" className="grid min-h-screen lg:grid-cols-[1.1fr_1fr]">
@@ -60,31 +59,11 @@ export default async function LoginPage() {
             <Logo />
           </div>
           <div className="card animate-scale-in p-7 sm:p-9">
-            {firstRun ? (
-              <>
-                <span className="grid h-12 w-12 place-items-center rounded-2xl bg-brand-green-light text-brand-green-dark">
-                  <Icon name="shield" />
-                </span>
-                <h2 className="mt-5 font-display text-3xl font-semibold uppercase text-brand-navy">
-                  Configuração inicial
-                </h2>
-                <p className="mt-2 text-sm text-slate-600">
-                  Nenhum usuário cadastrado ainda. Crie a conta de <strong>administrador</strong>{" "}
-                  — depois você cadastra jornalistas e diretores pelo painel.
-                </p>
-                <div className="mt-6">
-                  <SetupForm />
-                </div>
-              </>
-            ) : (
-              <>
-                <h2 className="font-display text-3xl font-semibold uppercase text-brand-navy">Entrar</h2>
-                <p className="mt-2 text-sm text-slate-600">Acesse com o e-mail e a senha cadastrados.</p>
-                <div className="mt-6">
-                  <LoginForm />
-                </div>
-              </>
-            )}
+            <h2 className="font-display text-3xl font-semibold uppercase text-brand-navy">Entrar</h2>
+            <p className="mt-2 text-sm text-slate-600">Acesse com o e-mail e a senha cadastrados.</p>
+            <div className="mt-6">
+              <LoginForm />
+            </div>
           </div>
           <Link
             href="/"

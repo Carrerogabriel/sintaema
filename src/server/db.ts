@@ -169,7 +169,24 @@ function open() {
   const db = new DatabaseSync(path.join(DATA_DIR, "sintaema.db"));
   db.exec("PRAGMA journal_mode = WAL; PRAGMA foreign_keys = ON; PRAGMA busy_timeout = 5000;");
   migrate(db);
+  ensureAdmin(db);
   return db;
+}
+
+/**
+ * Garante a conta de administrador a partir das variáveis de ambiente
+ * SINTAEMA_ADMIN_EMAIL, SINTAEMA_ADMIN_PASSWORD_HASH e SINTAEMA_ADMIN_NAME (opcional).
+ * Necessário na Vercel, onde o banco começa vazio a cada reinício do servidor.
+ * Só cria a conta se o e-mail ainda não existir; não altera contas já cadastradas.
+ */
+function ensureAdmin(db: DatabaseSync) {
+  const email = process.env.SINTAEMA_ADMIN_EMAIL?.trim();
+  const hash = process.env.SINTAEMA_ADMIN_PASSWORD_HASH?.trim();
+  if (!email || !hash?.startsWith("scrypt$")) return;
+  const name = process.env.SINTAEMA_ADMIN_NAME?.trim() || "Administrador";
+  db.prepare(
+    "INSERT OR IGNORE INTO users (name, email, password_hash, role) VALUES (?, ?, ?, 'admin')",
+  ).run(name, email, hash);
 }
 
 // Reuse one connection across hot reloads in development.

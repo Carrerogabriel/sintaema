@@ -3,7 +3,7 @@
 import { useActionState } from "react";
 import { Icon } from "@/components/Icon";
 import { PasswordInput } from "@/components/painel/PasswordInput";
-import { loginAction, setupAction } from "./actions";
+import { loginAction } from "./actions";
 
 function ErrorBox({ message }: { message?: string }) {
   if (!message) return null;
@@ -44,34 +44,6 @@ export function LoginForm() {
       <p className="text-center text-xs text-slate-500">
         Esqueceu a senha? Peça ao administrador do sistema para redefini-la.
       </p>
-    </form>
-  );
-}
-
-export function SetupForm() {
-  const [state, action, pending] = useActionState(setupAction, undefined);
-  return (
-    <form action={action} className="grid gap-4">
-      <ErrorBox message={state?.error} />
-      <label className="grid gap-1.5 text-sm font-semibold text-brand-navy">
-        Seu nome
-        <input name="nome" required defaultValue={state?.name} className="input" autoComplete="name" autoFocus />
-      </label>
-      <label className="grid gap-1.5 text-sm font-semibold text-brand-navy">
-        E-mail
-        <input name="email" type="email" required defaultValue={state?.email} className="input" autoComplete="username" />
-      </label>
-      <label className="grid gap-1.5 text-sm font-semibold text-brand-navy">
-        Senha
-        <PasswordInput name="senha" required autoComplete="new-password" placeholder="Mínimo 8 caracteres, letras e números" />
-      </label>
-      <label className="grid gap-1.5 text-sm font-semibold text-brand-navy">
-        Confirmar senha
-        <PasswordInput name="confirmar" required autoComplete="new-password" />
-      </label>
-      <button type="submit" disabled={pending} className="btn-primary mt-1 w-full disabled:opacity-70">
-        {pending ? "Criando…" : "Criar administrador"}
-      </button>
     </form>
   );
 }
