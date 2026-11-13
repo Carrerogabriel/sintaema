@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { PdfActions } from "@/components/PdfActions";
 import type { CSSProperties } from "react";
 import { originalText } from "@/data/historia";
 import { FadeIn, Scene } from "./motion";
@@ -63,6 +64,60 @@ export function Closing({ base }: { base: string }) {
           <Link href={`${base}/contato`} className="btn-ghost">
             Envie fotos e documentos
           </Link>
+        </FadeIn>
+
+        {/* Leve a história com você — dossiê em PDF */}
+        <FadeIn delay={100} className="mx-auto mt-24 max-w-5xl">
+          <div
+            id="baixar-pdf"
+            className="relative grid items-center gap-10 overflow-hidden rounded-[2rem] bg-white/[0.05] p-6 ring-1 ring-white/10 sm:p-10 md:grid-cols-[auto_1fr] md:gap-14 lg:p-14"
+          >
+            <div className="bg-grid absolute inset-0 opacity-30" aria-hidden="true" />
+
+            {/* Capa do documento */}
+            <a
+              href={`${base}/pdf/historia`}
+              target="_blank"
+              rel="noopener"
+              aria-label="Abrir o dossiê histórico em PDF (nova aba)"
+              className="group relative mx-auto block w-44 sm:w-52 [perspective:900px]"
+            >
+              <span className="absolute inset-0 translate-x-3 translate-y-3 rounded-lg bg-white/10" aria-hidden="true" />
+              <span className="relative flex aspect-[1/1.414] flex-col justify-between overflow-hidden rounded-lg bg-[#17130f] p-4 text-left shadow-[0_30px_60px_-20px_rgba(0,0,0,0.8)] ring-1 ring-white/15 transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] [transform:rotateY(-14deg)_rotateX(4deg)] group-hover:[transform:rotateY(0deg)_rotateX(0deg)_translateY(-6px)]">
+                <span className="text-[0.5rem] font-bold uppercase tracking-[0.3em] text-stone-400">SINTAEMA-SC · Dossiê histórico</span>
+                <span className="font-display text-[1.65rem] font-semibold uppercase leading-[0.9] text-stone-50">
+                  Sonhos,
+                  <br />
+                  lutas e
+                  <br />
+                  <span className="text-brand-green">conquistas</span>
+                </span>
+                <span className="flex items-end justify-between">
+                  <span className="font-display text-sm text-stone-300">1977 — hoje</span>
+                  <span className="rounded bg-red-500 px-1.5 py-0.5 text-[0.55rem] font-bold uppercase tracking-wider text-white">PDF</span>
+                </span>
+              </span>
+            </a>
+
+            <div className="relative text-center md:text-left">
+              <p className="text-xs font-bold uppercase tracking-[0.3em] text-brand-cyan">Leve esta história com você</p>
+              <h3 className="mt-3 font-display text-4xl font-semibold uppercase leading-[0.95] text-white sm:text-5xl">
+                Baixe o dossiê histórico
+              </h3>
+              <p className="font-story-serif mt-4 max-w-xl text-lg leading-relaxed text-sky-100/80 md:max-w-none">
+                Toda a trajetória do SINTAEMA-SC em um documento para ler, imprimir e compartilhar em assembleias, escolas e
+                com quem está chegando à categoria.
+              </p>
+              <PdfActions href={`${base}/pdf/historia`} label="o dossiê histórico" className="mt-7 justify-center md:justify-start" />
+              <a
+                href={`${base}/pdf/sobre?download=1`}
+                download
+                className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-sky-200/80 underline-offset-4 transition hover:text-white hover:underline"
+              >
+                Também disponível: perfil institucional em PDF
+              </a>
+            </div>
+          </div>
         </FadeIn>
 
         <FadeIn delay={150} className="mx-auto mt-20 max-w-3xl">

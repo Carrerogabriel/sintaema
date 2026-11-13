@@ -352,7 +352,7 @@ export default async function CompanyHomePage({ params }: CompanyParams) {
               Desde 9 de novembro de 1977, o SINTAEMA organiza a categoria em defesa da água
               pública e dos direitos de quem faz o saneamento funcionar em Santa Catarina.
             </p>
-            <Link href={`${base}/sobre`} className="btn-ghost mt-8">
+            <Link href={`${base}/historia`} className="btn-ghost mt-8">
               Conheça nossa história
               <Icon name="arrowRight" className="h-4 w-4" />
             </Link>

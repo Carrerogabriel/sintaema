@@ -10,7 +10,7 @@ import { Icon, SocialIcon } from "./Icon";
 import { Logo } from "./Logo";
 
 export const nav = [
-  { href: "/sobre", label: "O Sindicato" },
+  { href: "/historia", label: "O Sindicato" },
   { href: "/noticias", label: "Notícias" },
   { href: "/noticias?categoria=Lutas", label: "Campanhas" },
   { href: "/noticias?categoria=Eleições", label: "Eleições" },
