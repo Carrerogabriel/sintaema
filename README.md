@@ -142,7 +142,7 @@ Cada espaço de foto tem uma **finalidade narrativa** e um nome de arquivo. Bast
 - Textos, legendas e lista do acervo: [`src/data/historia.ts`](src/data/historia.ts)
 - As fotos atuais vêm da apresentação **“SINTAEMA: 40 anos de sonhos, lutas e conquistas” (2017)**, com as legendas originais.
 
-**Ainda faltam** (não há fotos dessas épocas na apresentação): anos 1970, Associação de 1975, fundação de 1977, primeira diretoria, fundadores, diretoria atual, 1º Congresso e sede.
+**Todos os espaços têm foto.** Onde a apresentação não tinha imagem da época (anos 1970, 1975, fundação de 1977, primeira diretoria, fundadores, diretoria atual, 1º Congresso e sede), foi usada a foto mais próxima do acervo, com a **legenda e o ano reais** visíveis. Quando surgirem fotos dessas épocas, basta trocar o arquivo pelo mesmo nome.
 
 </details>
 

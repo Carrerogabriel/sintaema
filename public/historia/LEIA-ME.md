@@ -52,13 +52,11 @@ As fotos vieram da apresentação **"SINTAEMA: 40 anos de sonhos, lutas e
 conquistas" (2017)**, com as legendas originais de cada slide. Cada foto mostra
 a sua legenda na página e no PDF.
 
-- Já preenchidos: `00-abertura`, `03-greve-1985`, `03-greves-1987`,
-  `03-lista-demissoes-1987`, `03-greve-1989`, `04-*` (exceto ações 1988) e
-  `05-liderancas-historicas`, `05-trabalhadores-em-campo`, `05-assembleias`,
-  `05-movimentos-sociais`.
-- Ainda faltam (não há fotos dessas épocas na apresentação): `01-anos-de-chumbo`,
-  `02-associacao-1975`, `02-fundacao-1977`, `02-primeira-diretoria`,
-  `02-primeiras-reunioes`, `03-acoes-1988`, `05-fundadores`,
-  `05-diretoria-atual`, `07-1-congresso` e `07-sede`.
+- **Todos os espaços têm foto.** Onde a apresentação não tinha imagem da época
+  (anos 1970, 1975, fundação de 1977, primeira diretoria, fundadores, diretoria
+  atual, 1º Congresso e sede), foi usada a foto mais próxima do acervo, sempre
+  com a **legenda original e o ano real** visíveis. Quando aparecerem fotos
+  dessas épocas, basta substituir o arquivo com o mesmo nome e ajustar a
+  legenda (`caption`) em `src/data/historia.ts`.
 - A galeria "Acervo" usa as fotos de `acervo/` (lista e legendas em
   `src/data/historia.ts`, constante `archive`).

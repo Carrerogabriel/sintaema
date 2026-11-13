@@ -52,26 +52,35 @@ export const photoSlots = {
     "Registro de época — anos 1970",
     "Contexto da ditadura militar: jornais, documentos ou fotos públicas da época.",
     "Registro histórico dos anos da ditadura militar",
+    "Greve geral — década de 80",
   ),
   associacao: slot(
     "02-associacao-1975",
     "Associação dos Servidores da Casan (1975)",
     "Primeiros integrantes, primeira sede ou documento da Associação.",
+    undefined,
+    "1991: Campanha salarial do Sintae",
   ),
   fundacao: slot(
     "02-fundacao-1977",
     "Fundação do Sindicato — 9/11/1977",
     "Assembleia de fundação, ata ou registro do dia da fundação.",
+    undefined,
+    "1985: Reunião de negociação, o registro mais antigo do acervo",
   ),
   primeiraDiretoria: slot(
     "02-primeira-diretoria",
     "Primeira diretoria",
     "Retrato da primeira diretoria eleita. Incluir nomes na legenda.",
+    undefined,
+    "1990: Eleição do Sindicato",
   ),
   primeirasReunioes: slot(
     "02-primeiras-reunioes",
     "Primeiras reuniões",
     "Encontros da categoria nos primeiros anos do Sindicato.",
+    undefined,
+    "1986: Negociação coletiva",
   ),
   greve1985: slot(
     "03-greve-1985",
@@ -94,7 +103,13 @@ export const photoSlots = {
     undefined,
     "1987: Assembleia estadual",
   ),
-  acoes1988: slot("03-acoes-1988", "Contra a venda de ações (1988)", "Primeira batalha contra a venda de ações da Casan."),
+  acoes1988: slot(
+    "03-acoes-1988",
+    "Contra a venda de ações (1988)",
+    "Primeira batalha contra a venda de ações da Casan.",
+    undefined,
+    "1998: Luta contra a venda de ações da Casan",
+  ),
   greve1989: slot(
     "03-greve-1989",
     "Greve de 1989 e greve de fome",
@@ -151,7 +166,13 @@ export const photoSlots = {
     undefined,
     "2011: Jornada de lutas",
   ),
-  fundadores: slot("05-fundadores", "Fundadoras e fundadores", "As pessoas que criaram a Associação e o Sindicato."),
+  fundadores: slot(
+    "05-fundadores",
+    "Fundadoras e fundadores",
+    "As pessoas que criaram a Associação e o Sindicato.",
+    undefined,
+    "Ao companheiro Del Rè, nosso carinho e gratidão. Sempre presente!",
+  ),
   liderancas: slot(
     "05-liderancas-historicas",
     "Lideranças históricas",
@@ -173,7 +194,13 @@ export const photoSlots = {
     undefined,
     "1995: Assembleia regional em Florianópolis",
   ),
-  diretoriaAtual: slot("05-diretoria-atual", "Diretoria atual", "Quem conduz o Sindicato hoje."),
+  diretoriaAtual: slot(
+    "05-diretoria-atual",
+    "Diretoria atual",
+    "Quem conduz o Sindicato hoje.",
+    undefined,
+    "2016: Reunião de negociação",
+  ),
   movimentos: slot(
     "05-movimentos-sociais",
     "Com os movimentos sociais",
@@ -181,8 +208,20 @@ export const photoSlots = {
     undefined,
     "2016: Greve geral por nenhum direito a menos",
   ),
-  congresso: slot("07-1-congresso", "1º Congresso do SINTAEMA-SC", "Delegadas e delegados reunidos em Itapema."),
-  sede: slot("07-sede", "Estrutura atual do Sindicato", "Sede, atendimento e equipe nos dias de hoje."),
+  congresso: slot(
+    "07-1-congresso",
+    "1º Congresso do SINTAEMA-SC",
+    "Delegadas e delegados reunidos em Itapema.",
+    undefined,
+    "2016: Assembleia estadual",
+  ),
+  sede: slot(
+    "07-sede",
+    "Estrutura atual do Sindicato",
+    "Sede, atendimento e equipe nos dias de hoje.",
+    undefined,
+    "Faixa do SINTAEMA-SC, FENATEMA e CTB-SC",
+  ),
 } satisfies Record<string, PhotoSlotInfo>;
 
 export type PhotoKey = keyof typeof photoSlots;

@@ -29,8 +29,8 @@ const fingerprint = Array.from({ length: 17 }, (_, i) => {
 });
 
 const around: Array<{ slot: PhotoSlotInfo; className: string; o: number; speed: string }> = [
-  { slot: photoSlots.fundadores, className: "left-[3%] top-[8%] w-[17%] aspect-[3/4]", o: 0.05, speed: "160px" },
-  { slot: photoSlots.liderancas, className: "left-[8%] bottom-[6%] w-[15%] aspect-square", o: 0.15, speed: "90px" },
+  { slot: photoSlots.liderancas, className: "left-[3%] top-[8%] w-[17%] aspect-[3/4]", o: 0.05, speed: "160px" },
+  { slot: photoSlots.fundadores, className: "left-[8%] bottom-[6%] w-[15%] aspect-square", o: 0.15, speed: "90px" },
   { slot: photoSlots.campo, className: "left-[24%] top-[3%] w-[12%] aspect-[4/5]", o: 0.25, speed: "220px" },
   { slot: photoSlots.assembleias, className: "right-[4%] top-[6%] w-[18%] aspect-[4/3]", o: 0.1, speed: "130px" },
   { slot: photoSlots.diretoriaAtual, className: "right-[6%] bottom-[8%] w-[16%] aspect-[3/4]", o: 0.2, speed: "200px" },
