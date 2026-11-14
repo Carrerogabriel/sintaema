@@ -7,15 +7,20 @@ import sharp from "sharp";
 /* Fontes                                                              */
 /* ------------------------------------------------------------------ */
 
-const fontDir = (pkg: string) => path.join(process.cwd(), "node_modules", "@fontsource", pkg, "files");
+/**
+ * Fontes copiadas de @fontsource para src/pdf/fonts (licença OFL, ver LICENSE-*).
+ * Ficam no projeto porque a Vercel não leva arquivos de node_modules lidos
+ * pelo caminho; a pasta é incluída na função pelo next.config.ts.
+ */
+const FONT_DIR = path.join(process.cwd(), "src", "pdf", "fonts");
 
 let fontsReady = false;
 
 /** Registra as fontes uma única vez (Oswald para títulos, Source Serif para o texto). */
 export function registerFonts() {
   if (fontsReady) return;
-  const serif = fontDir("source-serif-4");
-  const oswald = fontDir("oswald");
+  const serif = FONT_DIR;
+  const oswald = FONT_DIR;
 
   Font.register({
     family: "Serif",
