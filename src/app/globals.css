@@ -128,7 +128,6 @@
     opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
     transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
   transition-delay: var(--reveal-delay, 0ms);
-  will-change: opacity, transform;
 }
 
 .reveal[data-variant="left"] {
@@ -210,8 +209,8 @@
 
 .water-caustics {
   overflow: hidden;
-  mix-blend-mode: soft-light;
-  opacity: 0.22;
+  opacity: 0.1;
+  contain: strict;
 }
 
 .water-caustics::before,
@@ -232,13 +231,13 @@
 }
 
 @keyframes caustic-drift {
-  0% { transform: translate3d(-4%, -3%, 0) rotate(0deg); }
-  100% { transform: translate3d(4%, 3%, 0) rotate(3deg); }
+  0% { transform: translate3d(-4%, -3%, 0); }
+  100% { transform: translate3d(4%, 3%, 0); }
 }
 
 @keyframes caustic-drift-flip {
   0% { transform: scale(-1, 1) translate3d(-4%, 3%, 0); }
-  100% { transform: scale(-1, 1) translate3d(4%, -3%, 0) rotate(-3deg); }
+  100% { transform: scale(-1, 1) translate3d(4%, -3%, 0); }
 }
 
 .water-fall {
@@ -439,4 +438,10 @@
 .history-outline {
   color: transparent;
   -webkit-text-stroke: 1px rgba(214, 200, 180, 0.14);
+}
+
+/* Animações contínuas pausadas fora da tela (ver components/FxPause.tsx) */
+.fx-paused,
+.fx-paused * {
+  animation-play-state: paused !important;
 }

@@ -13,6 +13,10 @@ import { getCompany } from "@/data/companies";
 import { getPost, relatedPosts } from "@/data/content";
 import { categoryStyles, formatDate, readingTime } from "@/lib/format";
 
+
+// Lê o banco (editado pelo painel): renderiza a cada acesso.
+export const dynamic = "force-dynamic";
+
 export async function generateMetadata({
   params,
 }: {

@@ -6,6 +6,10 @@ import { eventsFor } from "@/data/content";
 import { resolveCompany, type CompanyParams } from "@/lib/company";
 import { formatShortDate } from "@/lib/format";
 
+
+// Lê o banco (editado pelo painel): renderiza a cada acesso.
+export const dynamic = "force-dynamic";
+
 export const metadata = { title: "Agenda" };
 
 export default async function AgendaPage({ params }: CompanyParams) {

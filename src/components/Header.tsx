@@ -154,7 +154,7 @@ export function Header({ company }: { company: Company }) {
         <div
           className={`border-b transition-all duration-500 ${
             scrolled
-              ? "border-brand-navy/10 bg-white/85 shadow-[0_8px_30px_rgba(11,46,92,0.08)] backdrop-blur-xl"
+              ? "border-brand-navy/10 bg-white/[0.97] shadow-[0_8px_30px_rgba(11,46,92,0.08)]"
               : "border-transparent bg-white"
           }`}
         >
