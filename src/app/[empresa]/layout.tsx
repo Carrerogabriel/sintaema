@@ -2,12 +2,17 @@ import type { Metadata } from "next";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { BackToTop } from "@/components/ScrollWidgets";
-import { getCompany } from "@/data/companies";
+import { companies, getCompany } from "@/data/companies";
 import { resolveCompany } from "@/lib/company";
 import { themeVars } from "@/lib/theme";
 
-// Conteúdo vem do banco e é editado pelo painel: renderiza a cada acesso.
-export const dynamic = "force-dynamic";
+// Só as páginas que leem o banco (notícias, agenda, busca, início) são
+// dinâmicas; as demais são geradas uma vez e servidas pela CDN.
+
+/** Gera as páginas estáticas de todas as empresas no build. */
+export function generateStaticParams() {
+  return companies.map((company) => ({ empresa: company.slug }));
+}
 
 export async function generateMetadata({
   params,

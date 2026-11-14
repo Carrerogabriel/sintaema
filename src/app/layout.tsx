@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Oswald, Source_Sans_3 } from "next/font/google";
+import { FxPause } from "@/components/FxPause";
 import { site } from "@/data/site";
 import "./globals.css";
 
@@ -49,6 +50,7 @@ export default function RootLayout({
           Pular para o conteúdo
         </a>
         {children}
+        <FxPause />
       </body>
     </html>
   );

@@ -5,6 +5,10 @@ import { PageHero } from "@/components/PageHero";
 import { searchPosts } from "@/data/content";
 import { resolveCompany, type CompanyParams } from "@/lib/company";
 
+
+// Lê o banco (editado pelo painel): renderiza a cada acesso.
+export const dynamic = "force-dynamic";
+
 export const metadata = { title: "Busca" };
 
 export default async function SearchPage({

@@ -12,6 +12,10 @@ import { bulletinsFor, postsFor, site } from "@/data/content";
 import { resolveCompany, type CompanyParams } from "@/lib/company";
 import { categoryStyles, formatDate } from "@/lib/format";
 
+
+// Lê o banco (editado pelo painel): renderiza a cada acesso.
+export const dynamic = "force-dynamic";
+
 const stats = [
   { value: 1977, label: "Ano de fundação", suffix: "" },
   { value: new Date().getFullYear() - 1977, label: "Anos de luta", suffix: "" },

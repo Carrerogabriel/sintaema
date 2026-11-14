@@ -7,6 +7,10 @@ import { Reveal } from "@/components/Reveal";
 import { postsFor, type Category } from "@/data/content";
 import { resolveCompany, type CompanyParams } from "@/lib/company";
 
+
+// Lê o banco (editado pelo painel): renderiza a cada acesso.
+export const dynamic = "force-dynamic";
+
 const filters: Array<Category | "Todas"> = [
   "Todas",
   "Notícias",
